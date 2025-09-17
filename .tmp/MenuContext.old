@@ -1,0 +1,58 @@
+import React, { createContext, useContext, useState, useEffect } from 'react';
+
+const MenuContext = createContext();
+
+export const useMenu = () => {
+  const context = useContext(MenuContext);
+  if (!context) {
+    throw new Error('useMenu must be used within MenuProvider');
+  }
+  return context;
+};
+
+export const MenuProvider = ({ children }) => {
+  // Auto-open menu by default
+  const [isMenuOpen, setIsMenuOpen] = useState(true);
+  
+  // Position state - fixed position
+  const [menuPosition, setMenuPosition] = useState(() => {
+    if (typeof window === 'undefined') {
+      return { x: 100, y: 100 };
+    }
+    
+    // Clear any stored position
+    sessionStorage.removeItem('menuPosition');
+    
+    // Fixed position in visible area - ensure menu is always visible
+    const menuWidth = 280;
+    const padding = 40;
+    const maxX = window.innerWidth - menuWidth - padding;
+    const safeX = Math.max(padding, Math.min(maxX, window.innerWidth * 0.7));
+    
+    
+    return { x: safeX, y: 100 };
+  });
+
+  // Save position to sessionStorage
+  useEffect(() => {
+    if (menuPosition && menuPosition.x !== undefined && menuPosition.y !== undefined) {
+      sessionStorage.setItem('menuPosition', JSON.stringify(menuPosition));
+    }
+  }, [menuPosition]);
+
+  const value = {
+    isMenuOpen,
+    setIsMenuOpen,
+    menuPosition,
+    setMenuPosition,
+    openMenu: () => setIsMenuOpen(true),
+    closeMenu: () => setIsMenuOpen(false),
+    toggleMenu: () => setIsMenuOpen(prev => !prev)
+  };
+
+  return (
+    <MenuContext.Provider value={value}>
+      {children}
+    </MenuContext.Provider>
+  );
+};

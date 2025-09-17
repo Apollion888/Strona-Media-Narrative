@@ -1,0 +1,84 @@
+import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useMenu } from '../contexts/MenuContext';
+
+const Navbar = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const isNavigating = useRef(false);
+  const { isMenuOpen, openMenu } = useMenu();
+
+  const navigateToSection = async (sectionId) => {
+    if (isNavigating.current) return;
+    isNavigating.current = true;
+    
+    try {
+      if (location.pathname === '/') {
+        // Smooth scroll when already on homepage
+        await new Promise(resolve => setTimeout(resolve, 50));
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      } else {
+        // Navigate to homepage with scroll target info
+        navigate('/', { state: { scrollTo: sectionId } });
+      }
+    } catch (error) {
+      console.error('Navigation error:', error);
+    } finally {
+      // Removed closeMenu reference
+      setTimeout(() => {
+        isNavigating.current = false;
+      }, 500);
+    }
+  };
+
+
+  return (
+    <header className="site-header" id="top">
+      <div className="container nav">
+        <a 
+          href="#" 
+          className="brand" 
+          aria-label="Media Narrative - strona glowna" 
+          onClick={(e) => {
+            e.preventDefault();
+            navigateToSection('home');
+          }}
+        >
+          <img src="/assets/svg/icons/logo/MEDIA NARRATIVE LOGO.svg" alt="Media Narrative" className="logo-img" width="180" height="40" />
+        </a>
+        
+        {!isMenuOpen && (
+          <button 
+            className="window-menu-btn" 
+            onClick={openMenu}
+            aria-label="Otworz menu"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '5px',
+              width: '44px',
+              height: '44px',
+              background: 'rgba(15, 47, 15, 0.3)',
+              backdropFilter: 'blur(20px)',
+              border: '1px solid rgba(0, 255, 0, 0.3)',
+              borderRadius: '12px',
+              padding: 0,
+              cursor: 'pointer',
+              transition: 'all 0.3s ease'
+            }}
+          >
+            <div style={{width: '8px', height: '8px', borderRadius: '50%', background: 'var(--mn-green)'}}></div>
+            <div style={{width: '8px', height: '8px', borderRadius: '50%', background: 'var(--mn-green)'}}></div>
+            <div style={{width: '8px', height: '8px', borderRadius: '50%', background: 'var(--mn-green)'}}></div>
+          </button>
+        )}
+      </div>
+    </header>
+  );
+};
+
+export default Navbar;
