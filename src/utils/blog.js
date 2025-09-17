@@ -11,11 +11,11 @@ const blogPosts = import.meta.glob('/content/blog/**/*.md', { as: 'raw', eager: 
  */
 function parseBlogPost(filePath, raw) {
   const { data: frontmatter, content } = matter(raw);
-  
+
   // Extract slug from filename (remove path and extension)
   const filename = filePath.split('/').pop();
   const slug = filename.replace(/\.md$/, '');
-  
+
   return {
     slug,
     title: frontmatter.title || 'Untitled',
@@ -26,7 +26,7 @@ function parseBlogPost(filePath, raw) {
     featured: frontmatter.featured || false,
     excerpt: frontmatter.excerpt || content.slice(0, 160).replace(/[#*`]/g, '').trim(),
     content,
-    frontmatter
+    frontmatter,
   };
 }
 
@@ -38,7 +38,7 @@ export function getAllPosts() {
   const posts = Object.entries(blogPosts).map(([filePath, raw]) => {
     return parseBlogPost(filePath, raw);
   });
-  
+
   // Sort by date, newest first
   return posts.sort((a, b) => b.date - a.date);
 }
@@ -50,7 +50,7 @@ export function getAllPosts() {
  */
 export function getPostBySlug(slug) {
   const posts = getAllPosts();
-  return posts.find(post => post.slug === slug) || null;
+  return posts.find((post) => post.slug === slug) || null;
 }
 
 /**
@@ -58,7 +58,7 @@ export function getPostBySlug(slug) {
  * @returns {Array} Array of featured blog posts
  */
 export function getFeaturedPosts() {
-  return getAllPosts().filter(post => post.featured);
+  return getAllPosts().filter((post) => post.featured);
 }
 
 /**
@@ -67,7 +67,7 @@ export function getFeaturedPosts() {
  * @returns {Array} Array of blog posts with the specified tag
  */
 export function getPostsByTag(tag) {
-  return getAllPosts().filter(post => 
-    post.tags.some(postTag => postTag.toLowerCase() === tag.toLowerCase())
+  return getAllPosts().filter((post) =>
+    post.tags.some((postTag) => postTag.toLowerCase() === tag.toLowerCase()),
   );
 }

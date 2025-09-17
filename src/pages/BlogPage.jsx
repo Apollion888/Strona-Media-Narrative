@@ -11,7 +11,7 @@ const BlogPage = () => {
     return new Intl.DateTimeFormat('pl-PL', {
       year: 'numeric',
       month: 'long',
-      day: 'numeric'
+      day: 'numeric',
     }).format(date);
   };
 
@@ -21,12 +21,10 @@ const BlogPage = () => {
         <AnimatedElement animationType="fadeInUp" delay={100}>
           <div className="section-intro">
             <span className="section-eyebrow">Blog</span>
-            <h1 className="section-title">
-              Insights z produkcji i post-produkcji
-            </h1>
+            <h1 className="section-title">Insights z produkcji i post-produkcji</h1>
             <p className="section-description">
-              Dzielę się technikami, narzędziami i przemyśleniami z realizacji projektów. 
-              Od planowania sesji po finalne efekty wizualne.
+              Dzielę się technikami, narzędziami i przemyśleniami z realizacji projektów. Od
+              planowania sesji po finalne efekty wizualne.
             </p>
           </div>
         </AnimatedElement>
@@ -40,18 +38,10 @@ const BlogPage = () => {
         ) : (
           <div className="blog-posts">
             {posts.map((post, index) => (
-              <AnimatedElement
-                key={post.slug}
-                animationType="fadeInUp"
-                delay={200 + index * 50}
-              >
+              <AnimatedElement key={post.slug} animationType="fadeInUp" delay={200 + index * 50}>
                 <article className="blog-post-card">
                   {/* Featured badge */}
-                  {post.featured && (
-                    <span className="blog-featured-badge">
-                      Wyróżniony
-                    </span>
-                  )}
+                  {post.featured && <span className="blog-featured-badge">Wyróżniony</span>}
 
                   {/* Cover image */}
                   {post.cover && (
@@ -69,30 +59,21 @@ const BlogPage = () => {
                   {/* Post content */}
                   <div className="blog-post-content">
                     <header className="blog-post-header">
-                      <time 
-                        dateTime={post.date.toISOString()} 
-                        className="blog-post-date"
-                      >
+                      <time dateTime={post.date.toISOString()} className="blog-post-date">
                         {formatDate(post.date)}
                       </time>
-                      
+
                       <h2 className="blog-post-title">
-                        <Link to={`/blog/${post.slug}`}>
-                          {post.title}
-                        </Link>
+                        <Link to={`/blog/${post.slug}`}>{post.title}</Link>
                       </h2>
-                      
+
                       {post.description && (
-                        <p className="blog-post-description">
-                          {post.description}
-                        </p>
+                        <p className="blog-post-description">{post.description}</p>
                       )}
-                      
+
                       {/* Excerpt fallback */}
                       {!post.description && post.excerpt && (
-                        <p className="blog-post-excerpt">
-                          {post.excerpt}
-                        </p>
+                        <p className="blog-post-excerpt">{post.excerpt}</p>
                       )}
                     </header>
 
@@ -105,17 +86,15 @@ const BlogPage = () => {
                           </span>
                         ))}
                         {post.tags.length > 3 && (
-                          <span className="blog-tag-more">
-                            +{post.tags.length - 3}
-                          </span>
+                          <span className="blog-tag-more">+{post.tags.length - 3}</span>
                         )}
                       </div>
                     )}
 
                     {/* Read more link */}
                     <footer className="blog-post-footer">
-                      <Link 
-                        to={`/blog/${post.slug}`} 
+                      <Link
+                        to={`/blog/${post.slug}`}
                         className="blog-read-more"
                         aria-label={`Czytaj więcej: ${post.title}`}
                       >
@@ -130,25 +109,21 @@ const BlogPage = () => {
         )}
 
         {/* Featured posts section */}
-        {posts.some(post => post.featured) && (
+        {posts.some((post) => post.featured) && (
           <AnimatedElement animationType="fadeInUp" delay={400}>
             <section className="blog-featured">
               <h2>Wyróżnione wpisy</h2>
               <div className="blog-featured-grid">
                 {posts
-                  .filter(post => post.featured)
+                  .filter((post) => post.featured)
                   .slice(0, 3)
                   .map((post) => (
                     <div key={post.slug} className="blog-featured-card">
                       <h3>
-                        <Link to={`/blog/${post.slug}`}>
-                          {post.title}
-                        </Link>
+                        <Link to={`/blog/${post.slug}`}>{post.title}</Link>
                       </h3>
                       <p>{post.excerpt}</p>
-                      <time dateTime={post.date.toISOString()}>
-                        {formatDate(post.date)}
-                      </time>
+                      <time dateTime={post.date.toISOString()}>{formatDate(post.date)}</time>
                     </div>
                   ))}
               </div>

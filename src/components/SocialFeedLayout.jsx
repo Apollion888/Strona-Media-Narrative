@@ -9,100 +9,104 @@ const SocialFeedLayout = ({ posts = [] }) => {
     {
       id: 1,
       type: 'article',
-      title: "AI Revolution in Creative Media",
-      content: "Jak sztuczna inteligencja fundamentalnie zmienia sposób tworzenia treści wizualnych, od fotografii po wideo. Nowe algorytmy uczenia maszynowego otwierają niespotykane możliwości...",
+      title: 'AI Revolution in Creative Media',
+      content:
+        'Jak sztuczna inteligencja fundamentalnie zmienia sposób tworzenia treści wizualnych, od fotografii po wideo. Nowe algorytmy uczenia maszynowego otwierają niespotykane możliwości...',
       author: {
-        name: "Media Narrative",
-        avatar: "🤖",
-        handle: "@media_narrative"
+        name: 'Media Narrative',
+        avatar: '🤖',
+        handle: '@media_narrative',
       },
-      timestamp: "2024-09-10T14:30:00Z",
-      category: "AI & Tech",
+      timestamp: '2024-09-10T14:30:00Z',
+      category: 'AI & Tech',
       engagement: {
         likes: 89,
         comments: 23,
         shares: 15,
-        views: 1247
+        views: 1247,
       },
-      tags: ["#AI", "#Photography", "#Innovation"],
+      tags: ['#AI', '#Photography', '#Innovation'],
       featured: true,
       media: {
-        type: "image",
-        preview: "🎨 AI-generated artwork showcase"
-      }
+        type: 'image',
+        preview: '🎨 AI-generated artwork showcase',
+      },
     },
     {
       id: 2,
       type: 'tutorial',
-      title: "Neural Networks w Post-produkcji",
-      content: "Praktyczne zastosowanie sieci neuronowych w profesjonalnej obróbce zdjęć i montażu wideo. Step-by-step tutorial z przykładami kodu...",
+      title: 'Neural Networks w Post-produkcji',
+      content:
+        'Praktyczne zastosowanie sieci neuronowych w profesjonalnej obróbce zdjęć i montażu wideo. Step-by-step tutorial z przykładami kodu...',
       author: {
-        name: "Media Narrative",
-        avatar: "🧠",
-        handle: "@media_narrative"
+        name: 'Media Narrative',
+        avatar: '🧠',
+        handle: '@media_narrative',
       },
-      timestamp: "2024-09-08T09:15:00Z",
-      category: "Tutorial",
+      timestamp: '2024-09-08T09:15:00Z',
+      category: 'Tutorial',
       engagement: {
         likes: 67,
         comments: 34,
         shares: 28,
-        views: 892
+        views: 892,
       },
-      tags: ["#NeuralNetworks", "#PostProduction", "#Tutorial"],
+      tags: ['#NeuralNetworks', '#PostProduction', '#Tutorial'],
       featured: false,
       media: {
-        type: "video",
-        preview: "🎬 Tutorial video - 12 min"
-      }
+        type: 'video',
+        preview: '🎬 Tutorial video - 12 min',
+      },
     },
     {
       id: 3,
       type: 'research',
-      title: "Quantum Computing dla Kreatywnych",
-      content: "Eksploracja potencjału obliczeń kwantowych w przyszłości branży kreatywnej i medialnej. Czy quantum computing zmieni sposób renderowania?",
+      title: 'Quantum Computing dla Kreatywnych',
+      content:
+        'Eksploracja potencjału obliczeń kwantowych w przyszłości branży kreatywnej i medialnej. Czy quantum computing zmieni sposób renderowania?',
       author: {
-        name: "Media Narrative",
-        avatar: "⚛️",
-        handle: "@media_narrative"
+        name: 'Media Narrative',
+        avatar: '⚛️',
+        handle: '@media_narrative',
       },
-      timestamp: "2024-09-05T16:45:00Z",
-      category: "Future Tech",
+      timestamp: '2024-09-05T16:45:00Z',
+      category: 'Future Tech',
       engagement: {
         likes: 134,
         comments: 45,
         shares: 67,
-        views: 2156
+        views: 2156,
       },
-      tags: ["#Quantum", "#FutureTech", "#Research"],
+      tags: ['#Quantum', '#FutureTech', '#Research'],
       featured: true,
       media: {
-        type: "infographic",
-        preview: "📊 Quantum computing infographic"
-      }
+        type: 'infographic',
+        preview: '📊 Quantum computing infographic',
+      },
     },
     {
       id: 4,
       type: 'announcement',
-      title: "Coming Soon: Holographic Displays",
-      content: "Przygotowuję serię artykułów o przyszłości wyświetlaczy holograficznych w reklamie i mediach. Pierwsza część już wkrótce!",
+      title: 'Coming Soon: Holographic Displays',
+      content:
+        'Przygotowuję serię artykułów o przyszłości wyświetlaczy holograficznych w reklamie i mediach. Pierwsza część już wkrótce!',
       author: {
-        name: "Media Narrative",
-        avatar: "🔮",
-        handle: "@media_narrative"
+        name: 'Media Narrative',
+        avatar: '🔮',
+        handle: '@media_narrative',
       },
-      timestamp: "2024-09-01T12:00:00Z",
-      category: "Announcement",
+      timestamp: '2024-09-01T12:00:00Z',
+      category: 'Announcement',
       engagement: {
         likes: 45,
         comments: 12,
         shares: 8,
-        views: 543
+        views: 543,
       },
-      tags: ["#ComingSoon", "#Holography", "#Innovation"],
+      tags: ['#ComingSoon', '#Holography', '#Innovation'],
       featured: false,
-      pinned: true
-    }
+      pinned: true,
+    },
   ];
 
   const blogPosts = posts.length > 0 ? posts : samplePosts;
@@ -111,7 +115,7 @@ const SocialFeedLayout = ({ posts = [] }) => {
     const now = new Date();
     const postTime = new Date(timestamp);
     const diffInHours = Math.floor((now - postTime) / (1000 * 60 * 60));
-    
+
     if (diffInHours < 1) return 'przed chwilą';
     if (diffInHours < 24) return `${diffInHours}h`;
     if (diffInHours < 48) return 'wczoraj';
@@ -120,27 +124,36 @@ const SocialFeedLayout = ({ posts = [] }) => {
 
   const getTypeIcon = (type) => {
     switch (type) {
-      case 'article': return '📰';
-      case 'tutorial': return '🎓'; 
-      case 'research': return '🔬';
-      case 'announcement': return '📢';
-      default: return '📝';
+      case 'article':
+        return '📰';
+      case 'tutorial':
+        return '🎓';
+      case 'research':
+        return '🔬';
+      case 'announcement':
+        return '📢';
+      default:
+        return '📝';
     }
   };
 
   const getTypeColor = (type) => {
     switch (type) {
-      case 'article': return '#00ff00';
-      case 'tutorial': return '#00ffff';
-      case 'research': return '#ff00ff';
-      case 'announcement': return '#ffff00';
-      default: return '#ffffff';
+      case 'article':
+        return '#00ff00';
+      case 'tutorial':
+        return '#00ffff';
+      case 'research':
+        return '#ff00ff';
+      case 'announcement':
+        return '#ffff00';
+      default:
+        return '#ffffff';
     }
   };
 
-  const filteredPosts = activeFilter === 'all' 
-    ? blogPosts 
-    : blogPosts.filter(post => post.type === activeFilter);
+  const filteredPosts =
+    activeFilter === 'all' ? blogPosts : blogPosts.filter((post) => post.type === activeFilter);
 
   const FeedPost = ({ post, index }) => {
     const [isLiked, setIsLiked] = useState(false);
@@ -151,21 +164,30 @@ const SocialFeedLayout = ({ posts = [] }) => {
         <div
           className="feed-post"
           style={{
-            background: 'linear-gradient(135deg, rgba(15, 47, 15, 0.3) 0%, rgba(0, 0, 0, 0.5) 100%)',
-            border: post.pinned ? '2px solid #ffff00' : post.featured ? '1px solid rgba(0, 255, 0, 0.3)' : '1px solid rgba(255, 255, 255, 0.1)',
+            background:
+              'linear-gradient(135deg, rgba(15, 47, 15, 0.3) 0%, rgba(0, 0, 0, 0.5) 100%)',
+            border: post.pinned
+              ? '2px solid #ffff00'
+              : post.featured
+                ? '1px solid rgba(0, 255, 0, 0.3)'
+                : '1px solid rgba(255, 255, 255, 0.1)',
             borderRadius: '15px',
             marginBottom: '1.5rem',
             backdropFilter: 'blur(12px)',
             overflow: 'hidden',
             transition: 'all 0.3s ease',
-            position: 'relative'
+            position: 'relative',
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.borderColor = post.featured ? 'rgba(0, 255, 0, 0.5)' : 'rgba(255, 255, 255, 0.2)';
+            e.currentTarget.style.borderColor = post.featured
+              ? 'rgba(0, 255, 0, 0.5)'
+              : 'rgba(255, 255, 255, 0.2)';
             e.currentTarget.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.3)';
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.borderColor = post.featured ? 'rgba(0, 255, 0, 0.3)' : 'rgba(255, 255, 255, 0.1)';
+            e.currentTarget.style.borderColor = post.featured
+              ? 'rgba(0, 255, 0, 0.3)'
+              : 'rgba(255, 255, 255, 0.1)';
             e.currentTarget.style.boxShadow = 'none';
           }}
         >
@@ -182,7 +204,7 @@ const SocialFeedLayout = ({ posts = [] }) => {
                 borderRadius: '12px',
                 fontSize: '0.7rem',
                 fontWeight: 'bold',
-                zIndex: 2
+                zIndex: 2,
               }}
             >
               📌 PINNED
@@ -204,7 +226,7 @@ const SocialFeedLayout = ({ posts = [] }) => {
                     alignItems: 'center',
                     justifyContent: 'center',
                     fontSize: '1.5rem',
-                    border: '2px solid rgba(255, 255, 255, 0.1)'
+                    border: '2px solid rgba(255, 255, 255, 0.1)',
                   }}
                 >
                   {post.author.avatar}
@@ -220,7 +242,14 @@ const SocialFeedLayout = ({ posts = [] }) => {
                       {post.author.handle}
                     </span>
                   </div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '2px' }}>
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.5rem',
+                      marginTop: '2px',
+                    }}
+                  >
                     <span style={{ color: getTypeColor(post.type), fontSize: '0.8rem' }}>
                       {getTypeIcon(post.type)} {post.type.toUpperCase()}
                     </span>
@@ -241,10 +270,10 @@ const SocialFeedLayout = ({ posts = [] }) => {
                   alignItems: 'center',
                   justifyContent: 'center',
                   cursor: 'pointer',
-                  transition: 'background 0.2s ease'
+                  transition: 'background 0.2s ease',
                 }}
-                onMouseEnter={(e) => e.target.style.background = 'rgba(255, 255, 255, 0.1)'}
-                onMouseLeave={(e) => e.target.style.background = 'transparent'}
+                onMouseEnter={(e) => (e.target.style.background = 'rgba(255, 255, 255, 0.1)')}
+                onMouseLeave={(e) => (e.target.style.background = 'transparent')}
               >
                 <span style={{ color: 'rgba(255, 255, 255, 0.6)' }}>⋯</span>
               </div>
@@ -261,7 +290,7 @@ const SocialFeedLayout = ({ posts = [] }) => {
                 fontWeight: '600',
                 lineHeight: '1.3',
                 marginBottom: '1rem',
-                cursor: 'pointer'
+                cursor: 'pointer',
               }}
               onClick={() => setIsExpanded(!isExpanded)}
             >
@@ -275,7 +304,7 @@ const SocialFeedLayout = ({ posts = [] }) => {
                 fontSize: '1rem',
                 lineHeight: '1.6',
                 marginBottom: '1rem',
-                cursor: 'pointer'
+                cursor: 'pointer',
               }}
               onClick={() => setIsExpanded(!isExpanded)}
             >
@@ -295,7 +324,7 @@ const SocialFeedLayout = ({ posts = [] }) => {
                   padding: '1rem',
                   marginBottom: '1rem',
                   textAlign: 'center',
-                  cursor: 'pointer'
+                  cursor: 'pointer',
                 }}
               >
                 <div style={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '1.1rem' }}>
@@ -313,10 +342,10 @@ const SocialFeedLayout = ({ posts = [] }) => {
                     color: '#00ffff',
                     fontSize: '0.9rem',
                     cursor: 'pointer',
-                    transition: 'color 0.2s ease'
+                    transition: 'color 0.2s ease',
                   }}
-                  onMouseEnter={(e) => e.target.style.color = '#ffffff'}
-                  onMouseLeave={(e) => e.target.style.color = '#00ffff'}
+                  onMouseEnter={(e) => (e.target.style.color = '#ffffff')}
+                  onMouseLeave={(e) => (e.target.style.color = '#00ffff')}
                 >
                   {tag}
                 </span>
@@ -331,7 +360,7 @@ const SocialFeedLayout = ({ posts = [] }) => {
               borderTop: '1px solid rgba(255, 255, 255, 0.05)',
               display: 'flex',
               justifyContent: 'space-between',
-              alignItems: 'center'
+              alignItems: 'center',
             }}
           >
             <div style={{ display: 'flex', gap: '2rem' }}>
@@ -346,11 +375,13 @@ const SocialFeedLayout = ({ posts = [] }) => {
                   alignItems: 'center',
                   gap: '0.5rem',
                   fontSize: '0.9rem',
-                  transition: 'color 0.2s ease'
+                  transition: 'color 0.2s ease',
                 }}
                 onClick={() => setIsLiked(!isLiked)}
-                onMouseEnter={(e) => e.target.style.color = '#ff4444'}
-                onMouseLeave={(e) => e.target.style.color = isLiked ? '#ff4444' : 'rgba(255, 255, 255, 0.6)'}
+                onMouseEnter={(e) => (e.target.style.color = '#ff4444')}
+                onMouseLeave={(e) =>
+                  (e.target.style.color = isLiked ? '#ff4444' : 'rgba(255, 255, 255, 0.6)')
+                }
               >
                 {isLiked ? '❤️' : '🤍'} {post.engagement.likes + (isLiked ? 1 : 0)}
               </button>
@@ -366,10 +397,10 @@ const SocialFeedLayout = ({ posts = [] }) => {
                   alignItems: 'center',
                   gap: '0.5rem',
                   fontSize: '0.9rem',
-                  transition: 'color 0.2s ease'
+                  transition: 'color 0.2s ease',
                 }}
-                onMouseEnter={(e) => e.target.style.color = '#ffffff'}
-                onMouseLeave={(e) => e.target.style.color = 'rgba(255, 255, 255, 0.6)'}
+                onMouseEnter={(e) => (e.target.style.color = '#ffffff')}
+                onMouseLeave={(e) => (e.target.style.color = 'rgba(255, 255, 255, 0.6)')}
               >
                 💬 {post.engagement.comments}
               </button>
@@ -385,10 +416,10 @@ const SocialFeedLayout = ({ posts = [] }) => {
                   alignItems: 'center',
                   gap: '0.5rem',
                   fontSize: '0.9rem',
-                  transition: 'color 0.2s ease'
+                  transition: 'color 0.2s ease',
                 }}
-                onMouseEnter={(e) => e.target.style.color = '#ffffff'}
-                onMouseLeave={(e) => e.target.style.color = 'rgba(255, 255, 255, 0.6)'}
+                onMouseEnter={(e) => (e.target.style.color = '#ffffff')}
+                onMouseLeave={(e) => (e.target.style.color = 'rgba(255, 255, 255, 0.6)')}
               >
                 🔄 {post.engagement.shares}
               </button>
@@ -405,7 +436,10 @@ const SocialFeedLayout = ({ posts = [] }) => {
   };
 
   return (
-    <div className="social-feed-layout" style={{ maxWidth: '800px', margin: '0 auto', padding: '1rem' }}>
+    <div
+      className="social-feed-layout"
+      style={{ maxWidth: '800px', margin: '0 auto', padding: '1rem' }}
+    >
       {/* Filter Tabs */}
       <AnimatedElement animationType="fadeIn" delay={50}>
         <div
@@ -419,7 +453,7 @@ const SocialFeedLayout = ({ posts = [] }) => {
             border: '1px solid rgba(255, 255, 255, 0.1)',
             backdropFilter: 'blur(10px)',
             flexWrap: 'wrap',
-            justifyContent: 'center'
+            justifyContent: 'center',
           }}
         >
           {['all', 'article', 'tutorial', 'research', 'announcement'].map((filter) => (
@@ -427,9 +461,10 @@ const SocialFeedLayout = ({ posts = [] }) => {
               key={filter}
               onClick={() => setActiveFilter(filter)}
               style={{
-                background: activeFilter === filter 
-                  ? 'linear-gradient(135deg, #00ff00, #00ffff)' 
-                  : 'rgba(255, 255, 255, 0.1)',
+                background:
+                  activeFilter === filter
+                    ? 'linear-gradient(135deg, #00ff00, #00ffff)'
+                    : 'rgba(255, 255, 255, 0.1)',
                 color: activeFilter === filter ? '#000000' : '#ffffff',
                 border: 'none',
                 padding: '0.8rem 1.5rem',
@@ -439,7 +474,7 @@ const SocialFeedLayout = ({ posts = [] }) => {
                 fontWeight: '600',
                 textTransform: 'uppercase',
                 letterSpacing: '0.5px',
-                transition: 'all 0.3s ease'
+                transition: 'all 0.3s ease',
               }}
               onMouseEnter={(e) => {
                 if (activeFilter !== filter) {
@@ -478,14 +513,16 @@ const SocialFeedLayout = ({ posts = [] }) => {
               cursor: 'pointer',
               fontSize: '1rem',
               fontWeight: '600',
-              transition: 'all 0.3s ease'
+              transition: 'all 0.3s ease',
             }}
             onMouseEnter={(e) => {
-              e.target.style.background = 'linear-gradient(135deg, rgba(0, 255, 0, 0.3), rgba(0, 255, 255, 0.3))';
+              e.target.style.background =
+                'linear-gradient(135deg, rgba(0, 255, 0, 0.3), rgba(0, 255, 255, 0.3))';
               e.target.style.transform = 'translateY(-2px)';
             }}
             onMouseLeave={(e) => {
-              e.target.style.background = 'linear-gradient(135deg, rgba(0, 255, 0, 0.2), rgba(0, 255, 255, 0.2))';
+              e.target.style.background =
+                'linear-gradient(135deg, rgba(0, 255, 0, 0.2), rgba(0, 255, 255, 0.2))';
               e.target.style.transform = 'translateY(0)';
             }}
           >

@@ -33,7 +33,7 @@ const Particles = () => {
     left: left,
     animation: `${animationType} ${duration}s ease-in-out infinite`,
     animationDelay: `${delay}s`,
-    boxShadow: `0 0 ${size * 2}px ${color}`
+    boxShadow: `0 0 ${size * 2}px ${color}`,
   });
 
   const particles = [
@@ -43,14 +43,14 @@ const Particles = () => {
     createParticle(5, '#ff6b00', '45%', '10%', 'float3', 6, 2),
     createParticle(7, '#ff0080', '65%', '85%', 'float1', 12, 3),
     createParticle(3, '#80ff00', '75%', '30%', 'float2', 9, 4),
-    
+
     // Średnie cząstki
     createParticle(3, '#00ffff', '10%', '60%', 'float3', 7, 1.5),
     createParticle(4, '#ff4000', '30%', '40%', 'float1', 11, 2.5),
     createParticle(2, '#8000ff', '50%', '70%', 'float2', 8, 3.5),
     createParticle(5, '#ffff00', '70%', '15%', 'float3', 9, 0.5),
     createParticle(3, '#ff0040', '85%', '60%', 'float1', 10, 4.5),
-    
+
     // Małe cząstki wypełniające
     createParticle(2, 'rgba(0, 255, 150, 0.6)', '8%', '45%', 'float2', 6, 0),
     createParticle(1, 'rgba(255, 100, 0, 0.7)', '22%', '90%', 'float3', 8, 1),
@@ -60,28 +60,28 @@ const Particles = () => {
     createParticle(1, 'rgba(255, 255, 0, 0.5)', '82%', '45%', 'float1', 8, 0.8),
     createParticle(2, 'rgba(128, 0, 255, 0.6)', '92%', '75%', 'float2', 7, 1.8),
     createParticle(1, 'rgba(255, 64, 0, 0.7)', '18%', '15%', 'float3', 9, 2.8),
-    
+
     // Mikro cząstki atmosferyczne
     createParticle(1, 'rgba(255, 255, 255, 0.3)', '12%', '35%', 'float1', 12, 0.3),
     createParticle(1, 'rgba(0, 255, 200, 0.4)', '28%', '65%', 'float2', 15, 1.3),
     createParticle(1, 'rgba(255, 150, 0, 0.3)', '42%', '50%', 'float3', 11, 2.3),
     createParticle(1, 'rgba(200, 0, 255, 0.4)', '58%', '95%', 'float1', 13, 3.3),
-    createParticle(1, 'rgba(0, 255, 100, 0.3)', '72%', '40%', 'float2', 14, 4.3)
+    createParticle(1, 'rgba(0, 255, 100, 0.3)', '72%', '40%', 'float2', 14, 4.3),
   ];
 
   return (
     <>
       <style>{keyframes}</style>
-      <div 
-        style={{ 
-          position: 'fixed', 
-          top: 0, 
-          left: 0, 
-          width: '100%', 
-          height: '100%', 
+      <div
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
           zIndex: 0,
           pointerEvents: 'none',
-          overflow: 'hidden'
+          overflow: 'hidden',
         }}
       >
         {particles.map((style, index) => (

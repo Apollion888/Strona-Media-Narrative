@@ -9,29 +9,31 @@ export const getBlogPosts = async () => {
       slug: 'welcome-to-media-narrative',
       title: 'Welcome to Media Narrative Blog',
       date: '2024-12-12',
-      description: 'Discover cutting-edge web development techniques and cyberpunk aesthetics in our inaugural blog post.',
+      description:
+        'Discover cutting-edge web development techniques and cyberpunk aesthetics in our inaugural blog post.',
       cover: '/images/blog/sample-cover.jpg',
       tags: ['web-development', 'cyberpunk', 'react'],
       featured: true,
-      excerpt: 'This is a sample blog post showcasing our new Netlify CMS powered blog system. Built with modern web technologies...'
-    }
+      excerpt:
+        'This is a sample blog post showcasing our new Netlify CMS powered blog system. Built with modern web technologies...',
+    },
   ];
 };
 
 export const getBlogPost = async (slug) => {
   // In a real implementation, this would fetch the specific post
   const posts = await getBlogPosts();
-  return posts.find(post => post.slug === slug);
+  return posts.find((post) => post.slug === slug);
 };
 
 export const getFeaturedPosts = async () => {
   const posts = await getBlogPosts();
-  return posts.filter(post => post.featured);
+  return posts.filter((post) => post.featured);
 };
 
 export const getPostsByTag = async (tag) => {
   const posts = await getBlogPosts();
-  return posts.filter(post => post.tags.includes(tag));
+  return posts.filter((post) => post.tags.includes(tag));
 };
 
 // Format date for display
@@ -40,7 +42,7 @@ export const formatDate = (dateString) => {
   return date.toLocaleDateString('pl-PL', {
     year: 'numeric',
     month: 'long',
-    day: 'numeric'
+    day: 'numeric',
   });
 };
 

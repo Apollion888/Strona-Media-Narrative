@@ -1,9 +1,9 @@
 ---
-title: "Accessibility & Quality Assurance"
-description: "WCAG AAA compliance guidelines, quality checklists, and testing procedures"
-version: "3.0.0"
-last_updated: "2024-12-12"
-tags: ["accessibility", "wcag", "quality", "testing", "checklists"]
+title: 'Accessibility & Quality Assurance'
+description: 'WCAG AAA compliance guidelines, quality checklists, and testing procedures'
+version: '3.0.0'
+last_updated: '2024-12-12'
+tags: ['accessibility', 'wcag', 'quality', 'testing', 'checklists']
 ---
 
 # Accessibility & Quality Assurance {#accessibility}
@@ -15,9 +15,11 @@ Media Narrative prioritizes **inclusive design** that works for all users regard
 ## Accessibility Standards {#accessibility-standards}
 
 ### WCAG AAA Compliance {#wcag-aaa}
+
 We exceed WCAG 2.1 Level AAA standards across all interactive elements and content.
 
 #### Success Criteria Met {#success-criteria}
+
 - **Color Contrast**: 7:1 ratio minimum (exceeds AAA requirement)
 - **Keyboard Navigation**: Full functionality without mouse
 - **Screen Reader Support**: Comprehensive ARIA implementation
@@ -27,6 +29,7 @@ We exceed WCAG 2.1 Level AAA standards across all interactive elements and conte
 ## Color & Contrast {#color-contrast}
 
 ### Contrast Ratios {#contrast-ratios}
+
 ```css
 /* All combinations exceed WCAG AAA (7:1) requirements */
 --mn-white on --mn-black: 21:1      /* Perfect readability */
@@ -38,18 +41,21 @@ We exceed WCAG 2.1 Level AAA standards across all interactive elements and conte
 ### Color Usage Guidelines {#color-usage-guidelines}
 
 **DO:**
+
 - Use color as enhancement, never as sole indicator
 - Provide text labels alongside color coding
 - Test with color blindness simulators
 - Maintain minimum 4.5:1 contrast for all text
 
 **DON'T:**
+
 - Rely solely on color to convey information
 - Use color combinations below minimum contrast
 - Create red-green only distinctions
 - Use low-contrast gray text for important content
 
 ### Implementation Examples {#color-implementation}
+
 ```css
 /* Success state - color + icon + text */
 .success-message {
@@ -57,7 +63,7 @@ We exceed WCAG 2.1 Level AAA standards across all interactive elements and conte
   border-left: 4px solid var(--mn-green);
 }
 .success-message::before {
-  content: "✓";
+  content: '✓';
   margin-right: 8px;
 }
 
@@ -68,7 +74,7 @@ We exceed WCAG 2.1 Level AAA standards across all interactive elements and conte
   background: rgba(255, 68, 68, 0.1);
 }
 .error-message::before {
-  content: "⚠";
+  content: '⚠';
   margin-right: 8px;
 }
 ```
@@ -76,6 +82,7 @@ We exceed WCAG 2.1 Level AAA standards across all interactive elements and conte
 ## Focus Management {#focus-management}
 
 ### Focus Indicators {#focus-indicators}
+
 ```css
 /* High-contrast focus indicators */
 .focusable:focus {
@@ -93,6 +100,7 @@ We exceed WCAG 2.1 Level AAA standards across all interactive elements and conte
 ```
 
 ### Focus Order Management {#focus-order}
+
 ```javascript
 // Focus trap for modals
 const FocusTrap = ({ children, isActive }) => {
@@ -102,9 +110,9 @@ const FocusTrap = ({ children, isActive }) => {
     if (!isActive) return;
 
     const focusableElements = trapRef.current.querySelectorAll(
-      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
     );
-    
+
     const firstElement = focusableElements[0];
     const lastElement = focusableElements[focusableElements.length - 1];
 
@@ -137,41 +145,45 @@ const FocusTrap = ({ children, isActive }) => {
 ## Keyboard Navigation {#keyboard-navigation}
 
 ### Navigation Patterns {#navigation-patterns}
+
 ```javascript
 // Comprehensive keyboard support
 const KeyboardNavigableList = ({ items, onSelect }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const listRef = useRef();
 
-  const handleKeyDown = useCallback((e) => {
-    switch (e.key) {
-      case 'ArrowDown':
-        e.preventDefault();
-        setActiveIndex(prev => Math.min(prev + 1, items.length - 1));
-        break;
-      case 'ArrowUp':
-        e.preventDefault();
-        setActiveIndex(prev => Math.max(prev - 1, 0));
-        break;
-      case 'Home':
-        e.preventDefault();
-        setActiveIndex(0);
-        break;
-      case 'End':
-        e.preventDefault();
-        setActiveIndex(items.length - 1);
-        break;
-      case 'Enter':
-      case ' ':
-        e.preventDefault();
-        onSelect(items[activeIndex]);
-        break;
-      case 'Escape':
-        e.preventDefault();
-        listRef.current.blur();
-        break;
-    }
-  }, [activeIndex, items, onSelect]);
+  const handleKeyDown = useCallback(
+    (e) => {
+      switch (e.key) {
+        case 'ArrowDown':
+          e.preventDefault();
+          setActiveIndex((prev) => Math.min(prev + 1, items.length - 1));
+          break;
+        case 'ArrowUp':
+          e.preventDefault();
+          setActiveIndex((prev) => Math.max(prev - 1, 0));
+          break;
+        case 'Home':
+          e.preventDefault();
+          setActiveIndex(0);
+          break;
+        case 'End':
+          e.preventDefault();
+          setActiveIndex(items.length - 1);
+          break;
+        case 'Enter':
+        case ' ':
+          e.preventDefault();
+          onSelect(items[activeIndex]);
+          break;
+        case 'Escape':
+          e.preventDefault();
+          listRef.current.blur();
+          break;
+      }
+    },
+    [activeIndex, items, onSelect],
+  );
 
   return (
     <ul
@@ -200,6 +212,7 @@ const KeyboardNavigableList = ({ items, onSelect }) => {
 ## Screen Reader Support {#screen-reader}
 
 ### ARIA Implementation {#aria-implementation}
+
 ```jsx
 // Accessible interactive card
 const AccessibleCard = ({ title, content, onActivate }) => {
@@ -233,17 +246,14 @@ const AccessibleCard = ({ title, content, onActivate }) => {
 
 // Live region for dynamic updates
 const LiveRegion = ({ message, priority = 'polite' }) => (
-  <div
-    aria-live={priority}
-    aria-atomic="true"
-    className="sr-only"
-  >
+  <div aria-live={priority} aria-atomic="true" className="sr-only">
     {message}
   </div>
 );
 ```
 
 ### Screen Reader Testing {#screen-reader-testing}
+
 ```javascript
 // Screen reader announcement helper
 const announceToScreenReader = (message, priority = 'polite') => {
@@ -252,9 +262,9 @@ const announceToScreenReader = (message, priority = 'polite') => {
   announcement.setAttribute('aria-atomic', 'true');
   announcement.className = 'sr-only';
   announcement.textContent = message;
-  
+
   document.body.appendChild(announcement);
-  
+
   setTimeout(() => {
     document.body.removeChild(announcement);
   }, 1000);
@@ -269,6 +279,7 @@ const handleSuccess = () => {
 ## Motion & Animation Accessibility {#motion-accessibility}
 
 ### Reduced Motion Support {#reduced-motion}
+
 ```css
 /* Respect user motion preferences */
 @media (prefers-reduced-motion: reduce) {
@@ -280,12 +291,12 @@ const handleSuccess = () => {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-  
+
   /* Disable particle animations */
   .particles-container {
     display: none;
   }
-  
+
   /* Reduce complex animations */
   .complex-animation {
     animation: none;
@@ -303,23 +314,26 @@ const handleSuccess = () => {
 ```
 
 ### Accessible Animation Implementation {#accessible-animation}
+
 ```javascript
 import { useReducedMotion } from 'framer-motion';
 
 const AccessibleMotion = ({ children }) => {
   const shouldReduceMotion = useReducedMotion();
 
-  const variants = shouldReduceMotion ? {
-    // Reduced motion variants
-    initial: { opacity: 0 },
-    animate: { opacity: 1 },
-    exit: { opacity: 0 }
-  } : {
-    // Full motion variants
-    initial: { opacity: 0, y: 20, scale: 0.95 },
-    animate: { opacity: 1, y: 0, scale: 1 },
-    exit: { opacity: 0, y: -20, scale: 0.95 }
-  };
+  const variants = shouldReduceMotion
+    ? {
+        // Reduced motion variants
+        initial: { opacity: 0 },
+        animate: { opacity: 1 },
+        exit: { opacity: 0 },
+      }
+    : {
+        // Full motion variants
+        initial: { opacity: 0, y: 20, scale: 0.95 },
+        animate: { opacity: 1, y: 0, scale: 1 },
+        exit: { opacity: 0, y: -20, scale: 0.95 },
+      };
 
   return (
     <motion.div
@@ -329,7 +343,7 @@ const AccessibleMotion = ({ children }) => {
       exit="exit"
       transition={{
         duration: shouldReduceMotion ? 0.01 : 0.3,
-        ease: "easeOut"
+        ease: 'easeOut',
       }}
     >
       {children}
@@ -339,14 +353,14 @@ const AccessibleMotion = ({ children }) => {
 
 // Motion toggle control
 const MotionToggle = () => {
-  const [motionEnabled, setMotionEnabled] = useState(() => 
-    !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  const [motionEnabled, setMotionEnabled] = useState(
+    () => !window.matchMedia('(prefers-reduced-motion: reduce)').matches,
   );
 
   useEffect(() => {
     document.documentElement.style.setProperty(
       '--motion-duration',
-      motionEnabled ? '0.3s' : '0.01ms'
+      motionEnabled ? '0.3s' : '0.01ms',
     );
   }, [motionEnabled]);
 
@@ -365,31 +379,29 @@ const MotionToggle = () => {
 ## Image Accessibility {#image-accessibility}
 
 ### Alt Text Guidelines {#alt-text}
+
 ```jsx
 // Descriptive alt text examples
 const AccessibleImages = () => (
   <>
     {/* Decorative image */}
     <img src="decoration.jpg" alt="" role="presentation" />
-    
+
     {/* Informative image */}
-    <img 
-      src="chart.jpg" 
-      alt="Sales increased 40% from January to March 2024, peaking in February at $50,000" 
+    <img
+      src="chart.jpg"
+      alt="Sales increased 40% from January to March 2024, peaking in February at $50,000"
     />
-    
+
     {/* Interactive image */}
     <button>
-      <img 
-        src="close.svg" 
-        alt="Close dialog" 
-      />
+      <img src="close.svg" alt="Close dialog" />
     </button>
-    
+
     {/* Complex image with description */}
     <figure>
-      <img 
-        src="architecture.jpg" 
+      <img
+        src="architecture.jpg"
         alt="Media Narrative system architecture diagram"
         aria-describedby="architecture-description"
       />
@@ -406,6 +418,7 @@ const AccessibleImages = () => (
 ### Authoring Checklist {#authoring-checklist}
 
 #### Pre-Writing Phase {#pre-writing}
+
 - [ ] **Topic Research**: Verified search volume and competitor analysis
 - [ ] **Audience Fit**: Confirms alignment with Media Narrative's technical focus
 - [ ] **Learning Objectives**: Clearly defined what readers will accomplish
@@ -413,6 +426,7 @@ const AccessibleImages = () => (
 - [ ] **Success Metrics**: Defined engagement and conversion goals
 
 #### Content Quality {#content-quality}
+
 - [ ] **Clear Hierarchy**: Proper H1-H6 heading structure
 - [ ] **Logical Flow**: Information progresses logically
 - [ ] **Scannable Format**: Headers, bullets, code blocks for easy scanning
@@ -420,6 +434,7 @@ const AccessibleImages = () => (
 - [ ] **Key Takeaways**: 3-5 actionable insights highlighted
 
 #### Brand Alignment {#brand-alignment}
+
 - [ ] **Technical Authority**: Demonstrates deep technical knowledge
 - [ ] **Professional Clarity**: Clear, direct communication style
 - [ ] **Modern Perspective**: Reflects current best practices
@@ -427,6 +442,7 @@ const AccessibleImages = () => (
 - [ ] **Inclusive Language**: Uses welcoming, inclusive terminology
 
 #### Accessibility Requirements {#accessibility-requirements}
+
 - [ ] **Reading Level**: Appropriate for technical audience
 - [ ] **Plain Language**: Complex concepts explained clearly
 - [ ] **Logical Structure**: Content flows logically
@@ -437,6 +453,7 @@ const AccessibleImages = () => (
 ### PR Review Checklist {#pr-review-checklist}
 
 #### Code Quality Standards {#code-quality}
+
 - [ ] **React/JavaScript Standards**: Components follow single responsibility principle
 - [ ] **Hook Usage**: React hooks used correctly (no hooks in conditionals/loops)
 - [ ] **State Management**: Appropriate state placement (local vs global)
@@ -445,6 +462,7 @@ const AccessibleImages = () => (
 - [ ] **Error Boundaries**: Error handling implemented where needed
 
 #### Media Narrative Brand Compliance {#brand-compliance}
+
 - [ ] **Color Palette**: Uses only approved brand colors
 - [ ] **Typography**: Follows brand font hierarchy
 - [ ] **Spacing**: Consistent with brand spacing scale
@@ -453,6 +471,7 @@ const AccessibleImages = () => (
 - [ ] **Dark Theme**: Maintains dark-first aesthetic
 
 #### Accessibility Compliance {#accessibility-compliance}
+
 - [ ] **Semantic HTML**: Proper HTML elements and ARIA roles
 - [ ] **Keyboard Navigation**: All interactive elements keyboard accessible
 - [ ] **Focus Management**: Visible focus indicators and logical tab order
@@ -463,6 +482,7 @@ const AccessibleImages = () => (
 ### Visual QC Checklist {#visual-qc-checklist}
 
 #### Brand Consistency {#brand-consistency}
+
 - [ ] **Primary Colors**: Only approved brand colors used (#0A0A0A, #00FF00, #FFFFFF)
 - [ ] **Accent Colors**: Cyan and green accents used appropriately
 - [ ] **Color Combinations**: High contrast ratios maintained (>7:1 for AAA)
@@ -471,6 +491,7 @@ const AccessibleImages = () => (
 - [ ] **Animation**: Motion follows brand timing and easing guidelines
 
 #### Interactive Elements {#interactive-elements}
+
 - [ ] **Button Styles**: Primary, secondary, ghost variants correct
 - [ ] **Button Heights**: 44px minimum for touch targets
 - [ ] **Hover States**: Subtle glow and transform effects
@@ -479,6 +500,7 @@ const AccessibleImages = () => (
 - [ ] **Loading States**: Spinner or skeleton loading patterns
 
 #### Cross-Browser Compatibility {#cross-browser}
+
 - [ ] **Chrome**: Latest version works correctly
 - [ ] **Firefox**: Latest version works correctly
 - [ ] **Safari**: Latest version works correctly
@@ -489,6 +511,7 @@ const AccessibleImages = () => (
 ## Testing Guidelines {#testing-guidelines}
 
 ### Automated Testing {#automated-testing}
+
 ```javascript
 // Accessibility testing with jest-axe
 import { axe, toHaveNoViolations } from 'jest-axe';
@@ -506,10 +529,10 @@ test('component has no accessibility violations', async () => {
 test('supports keyboard navigation', () => {
   render(<InteractiveComponent />);
   const button = screen.getByRole('button');
-  
+
   button.focus();
   expect(button).toHaveFocus();
-  
+
   fireEvent.keyDown(button, { key: 'Enter' });
   expect(mockHandler).toHaveBeenCalled();
 });
@@ -518,12 +541,14 @@ test('supports keyboard navigation', () => {
 ### Manual Testing Procedures {#manual-testing}
 
 #### Screen Reader Testing {#screen-reader-testing-manual}
+
 1. **NVDA (Windows)**: Test with free screen reader
 2. **JAWS (Windows)**: Professional screen reader testing
 3. **VoiceOver (macOS)**: Built-in screen reader
 4. **TalkBack (Android)**: Mobile screen reader testing
 
 #### Keyboard Testing {#keyboard-testing}
+
 1. **Tab Navigation**: All interactive elements reachable
 2. **Focus Indicators**: Visible focus on all elements
 3. **Escape Key**: Closes modals and menus
@@ -531,6 +556,7 @@ test('supports keyboard navigation', () => {
 5. **Enter/Space**: Activate buttons and links
 
 #### Color Vision Testing {#color-vision-testing}
+
 - **Deuteranopia**: Red-green color blindness
 - **Protanopia**: Red color blindness
 - **Tritanopia**: Blue-yellow color blindness
@@ -539,12 +565,14 @@ test('supports keyboard navigation', () => {
 ### Testing Tools {#testing-tools}
 
 #### Browser Extensions {#browser-extensions}
+
 - **axe DevTools**: Automated accessibility scanning
 - **WAVE**: Web accessibility evaluation
 - **Lighthouse**: Performance and accessibility audits
 - **Color Oracle**: Color blindness simulation
 
 #### Command Line Tools {#command-line-tools}
+
 ```bash
 # Pa11y accessibility testing
 npm install -g pa11y
@@ -561,6 +589,7 @@ npm run test:a11y
 ## Implementation Checklist {#implementation-checklist}
 
 ### Component Development {#component-development}
+
 - [ ] **Semantic HTML**: Use appropriate HTML elements
 - [ ] **ARIA Labels**: Add labels where HTML semantics aren't sufficient
 - [ ] **Focus Management**: Ensure logical tab order
@@ -569,6 +598,7 @@ npm run test:a11y
 - [ ] **Color Contrast**: Verify contrast ratios meet AAA standards
 
 ### Page Development {#page-development}
+
 - [ ] **Document Structure**: Proper heading hierarchy
 - [ ] **Skip Links**: Navigation bypass for keyboard users
 - [ ] **Page Titles**: Unique, descriptive page titles
@@ -577,6 +607,7 @@ npm run test:a11y
 - [ ] **Focus Order**: Logical reading and navigation order
 
 ### Testing & Validation {#testing-validation}
+
 - [ ] **Automated Tests**: axe-core integration in test suite
 - [ ] **Manual Testing**: Keyboard and screen reader testing
 - [ ] **Performance**: Lighthouse accessibility audit

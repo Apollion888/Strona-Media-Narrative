@@ -14,11 +14,11 @@ class ErrorBoundary extends React.Component {
   componentDidCatch(error, errorInfo) {
     // Log error to console for debugging
     console.error('ErrorBoundary caught an error:', error, errorInfo);
-    
+
     // Update state with error details
     this.setState({
       error: error,
-      errorInfo: errorInfo
+      errorInfo: errorInfo,
     });
   }
 
@@ -31,21 +31,15 @@ class ErrorBoundary extends React.Component {
             <div className="error-boundary-content">
               <h1>Coś poszło nie tak</h1>
               <p>
-                Wystąpił nieoczekiwany błąd w aplikacji. Spróbuj odświeżyć stronę 
-                lub wróć do strony głównej.
+                Wystąpił nieoczekiwany błąd w aplikacji. Spróbuj odświeżyć stronę lub wróć do strony
+                głównej.
               </p>
-              
+
               <div className="error-boundary-actions">
-                <button 
-                  className="btn btn-primary"
-                  onClick={() => window.location.reload()}
-                >
+                <button className="btn btn-primary" onClick={() => window.location.reload()}>
                   Odśwież stronę
                 </button>
-                <button 
-                  className="btn btn-outline"
-                  onClick={() => window.location.href = '/'}
-                >
+                <button className="btn btn-outline" onClick={() => (window.location.href = '/')}>
                   Wróć do strony głównej
                 </button>
               </div>

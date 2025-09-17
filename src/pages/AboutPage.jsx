@@ -3,21 +3,21 @@
 const stats = [
   { value: '10+', label: 'lat doswiadczenia' },
   { value: '200+', label: 'realizacji' },
-  { value: '98%', label: 'klientow wraca' }
+  { value: '98%', label: 'klientow wraca' },
 ];
 
 const tools = [
   { name: 'Photoshop', icon: '/assets/icons/tools/Adobe_Photoshop_CC_icon.svg.png' },
   { name: 'Lightroom', icon: '/assets/icons/tools/Adobe_Photoshop_Lightroom_CC_logo.svg.png' },
   { name: 'DaVinci Resolve', icon: '/assets/icons/tools/DaVinci_Resolve_17_logo.svg.png' },
-  { name: 'ComfyUI', icon: '/assets/icons/tools/comfy-ui.png' }
+  { name: 'ComfyUI', icon: '/assets/icons/tools/comfy-ui.png' },
 ];
 
 const experienceTimeline = [
   'Ponad dziesiec lat w branzy kreatywnej i medialnej.',
   'Wspolpraca z markami tech, fashion i lifestyle.',
   'Realizacje projektow o zasiegu miedzynarodowym.',
-  'Warsztaty i wsparcie zespolow w obszarze produkcji.'
+  'Warsztaty i wsparcie zespolow w obszarze produkcji.',
 ];
 
 const carouselImages = [
@@ -25,22 +25,21 @@ const carouselImages = [
     src: '/assets/images/gallery/akcja-1.png',
     alt: 'Ryszard Mierzejewski prowadzi sesje foto w studio',
     title: 'Rezyseria planu',
-    description: 'Plan zdjeciowy z neonowym oswietleniem i zespolowa koordynacja detali.'
+    description: 'Plan zdjeciowy z neonowym oswietleniem i zespolowa koordynacja detali.',
   },
   {
     src: '/assets/images/gallery/akcja-2.png',
     alt: 'Ryszard Mierzejewski filmuje ujecia w plenerze',
     title: 'Lokacje plenerowe',
-    description: 'Nagrania w ruchu z wykorzystaniem stabilizacji i kontrola swiatla.'
+    description: 'Nagrania w ruchu z wykorzystaniem stabilizacji i kontrola swiatla.',
   },
   {
     src: '/assets/images/gallery/akcja-3.png',
     alt: 'Ryszard Mierzejewski przy stanowisku montazowym',
     title: 'Postprodukcja premium',
-    description: 'Grading, narracja i dostosowanie formatow do digital rolloutu.'
-  }
+    description: 'Grading, narracja i dostosowanie formatow do digital rolloutu.',
+  },
 ];
-
 
 const SLIDE_INTERVAL = 4200;
 
@@ -55,7 +54,7 @@ const AboutPage = () => {
           }
         });
       },
-      { threshold: 0.1, rootMargin: '0px 0px -15% 0px' }
+      { threshold: 0.1, rootMargin: '0px 0px -15% 0px' },
     );
 
     const targets = document.querySelectorAll('.anim-on-scroll');
@@ -97,25 +96,33 @@ const AboutPage = () => {
     };
   }, [startAutoplay, stopAutoplay, totalSlides]);
 
-  const handleSelectSlide = useCallback((index) => {
-    setCurrentSlide(index);
-    if (totalSlides <= 1) {
-      return;
-    }
+  const handleSelectSlide = useCallback(
+    (index) => {
+      setCurrentSlide(index);
+      if (totalSlides <= 1) {
+        return;
+      }
 
-    startAutoplay();
-  }, [startAutoplay, totalSlides]);
+      startAutoplay();
+    },
+    [startAutoplay, totalSlides],
+  );
 
   const previousSlide = totalSlides > 0 ? (currentSlide - 1 + totalSlides) % totalSlides : 0;
   const nextSlide = totalSlides > 0 ? (currentSlide + 1) % totalSlides : 0;
-  const carouselEventHandlers = totalSlides > 1 ? {
-    onMouseEnter: stopAutoplay,
-    onMouseLeave: startAutoplay
-  } : {};
+  const carouselEventHandlers =
+    totalSlides > 1
+      ? {
+          onMouseEnter: stopAutoplay,
+          onMouseLeave: startAutoplay,
+        }
+      : {};
 
   return (
     <div className="about-page">
-      <a className="skip-link" href="#main">Pomin do tresci</a>
+      <a className="skip-link" href="#main">
+        Pomin do tresci
+      </a>
 
       <main id="main" className="about-page">
         <section className="section about-hero">
@@ -124,8 +131,8 @@ const AboutPage = () => {
               <span className="section-eyebrow">O mnie</span>
               <h1 className="section-title">Ryszard Mierzejewski</h1>
               <p className="section-description">
-                Fotograf, operator i storyteller. Tworze kompletne systemy wizualne dla marek, w ktorych
-                kazdy format ma ten sam rytm i wysoka jakosc.
+                Fotograf, operator i storyteller. Tworze kompletne systemy wizualne dla marek, w
+                ktorych kazdy format ma ten sam rytm i wysoka jakosc.
               </p>
             </div>
 
@@ -133,12 +140,14 @@ const AboutPage = () => {
               <div className="about-content">
                 <div className="about-intro anim-on-scroll">
                   <h2>Czesc, jestem Ryszard</h2>
-                  <p className="tagline">Skupiam sie na scenach, ktore wygladaja jak premium product launch.</p>
+                  <p className="tagline">
+                    Skupiam sie na scenach, ktore wygladaja jak premium product launch.
+                  </p>
                   <div className="about-details">
                     <p>
-                      Lacze prace na planie z zaawansowana postprodukcja. Dzieki temu kontroluje kazdy etap -
-                      od planowania storytellingu, przez nagrania, po gotowe formaty dla serwisow streaming i
-                      social.
+                      Lacze prace na planie z zaawansowana postprodukcja. Dzieki temu kontroluje
+                      kazdy etap - od planowania storytellingu, przez nagrania, po gotowe formaty
+                      dla serwisow streaming i social.
                     </p>
                   </div>
                 </div>
@@ -176,10 +185,16 @@ const AboutPage = () => {
                 </div>
 
                 <div className="cta-buttons anim-on-scroll">
-                  <button onClick={() => window.location.href = '/#kontakt'} className="btn btn-primary">
+                  <button
+                    onClick={() => (window.location.href = '/#kontakt')}
+                    className="btn btn-primary"
+                  >
                     Skontaktuj sie ze mna
                   </button>
-                  <button onClick={() => window.location.href = '/#portfolio'} className="btn btn-outline">
+                  <button
+                    onClick={() => (window.location.href = '/#portfolio')}
+                    className="btn btn-outline"
+                  >
                     Zobacz moje portfolio
                   </button>
                 </div>
@@ -197,8 +212,10 @@ const AboutPage = () => {
                         'carousel-item',
                         isActive ? 'is-active' : '',
                         isPrevious ? 'is-previous' : '',
-                        isNext ? 'is-next' : ''
-                      ].filter(Boolean).join(' ');
+                        isNext ? 'is-next' : '',
+                      ]
+                        .filter(Boolean)
+                        .join(' ');
 
                       return (
                         <figure
@@ -260,6 +277,3 @@ const AboutPage = () => {
 };
 
 export default AboutPage;
-
-
-

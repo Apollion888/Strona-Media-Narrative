@@ -12,7 +12,8 @@ function initMenu() {
   const windowTitleBar = windowMenu.querySelector('.window-titlebar');
 
   let lastFocusedElement = null;
-  const getFocusable = () => windowMenu.querySelectorAll('a, button, [tabindex]:not([tabindex="-1"])');
+  const getFocusable = () =>
+    windowMenu.querySelectorAll('a, button, [tabindex]:not([tabindex="-1"])');
   const isVisible = () => windowMenu.classList.contains('visible');
 
   const onKeyDown = (e) => {
@@ -23,8 +24,14 @@ function initMenu() {
     const last = focusable[focusable.length - 1];
     const current = document.activeElement;
     if (e.shiftKey) {
-      if (current === first || !windowMenu.contains(current)) { e.preventDefault(); last.focus(); }
-    } else if (current === last) { e.preventDefault(); first.focus(); }
+      if (current === first || !windowMenu.contains(current)) {
+        e.preventDefault();
+        last.focus();
+      }
+    } else if (current === last) {
+      e.preventDefault();
+      first.focus();
+    }
   };
 
   const closeMenu = () => {
@@ -33,7 +40,12 @@ function initMenu() {
     windowMenuBtn.setAttribute('aria-expanded', 'false');
     windowMenu.setAttribute('aria-hidden', 'true');
     document.removeEventListener('keydown', onKeyDown, true);
-    if (lastFocusedElement) { try { lastFocusedElement.focus(); } catch (_) {} lastFocusedElement = null; }
+    if (lastFocusedElement) {
+      try {
+        lastFocusedElement.focus();
+      } catch (_) {}
+      lastFocusedElement = null;
+    }
     setTimeout(() => windowMenu.classList.remove('closing'), 400);
   };
 
@@ -53,12 +65,19 @@ function initMenu() {
   };
 
   // Drag & drop okna (po pasku tytuĹ‚u)
-  let isDragging = false, startX = 0, startY = 0, startLeft = 0, startTop = 0;
+  let isDragging = false,
+    startX = 0,
+    startY = 0,
+    startLeft = 0,
+    startTop = 0;
   const startDrag = (e) => {
     if (e.target === windowClose || windowClose.contains(e.target)) return;
     isDragging = true;
     const rect = windowMenu.getBoundingClientRect();
-    startX = e.clientX; startY = e.clientY; startLeft = rect.left; startTop = rect.top;
+    startX = e.clientX;
+    startY = e.clientY;
+    startLeft = rect.left;
+    startTop = rect.top;
     windowMenu.classList.add('dragging');
     document.body.style.cursor = 'grabbing';
     document.body.style.userSelect = 'none';
@@ -94,13 +113,19 @@ function initMenu() {
     // Tylko X zamyka â€” przycisk otwiera i ponownie wyĹ›wietla
     if (!windowMenu.classList.contains('visible')) openMenu();
   });
-  windowClose.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); closeMenu(); });
+  windowClose.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    closeMenu();
+  });
 
   windowMenu.dataset.initialized = 'true';
 }
 
 function initParticles() {
-  const isTargetPage = document.querySelector('[data-barba-namespace="home"], [data-barba-namespace="about"]');
+  const isTargetPage = document.querySelector(
+    '[data-barba-namespace="home"], [data-barba-namespace="about"]',
+  );
   if (!isTargetPage || particleSystemInstance || typeof ParticleSystem === 'undefined') return;
   const container = document.getElementById('particles-js');
   if (!container) return;
@@ -112,7 +137,7 @@ function initParticles() {
     lineDistance: 150,
     particleSize: { min: 1, max: 3 },
     speed: 1,
-    interactivity: { grabDistance: 140, pushParticles: 4 }
+    interactivity: { grabDistance: 140, pushParticles: 4 },
   });
 }
 
@@ -135,26 +160,51 @@ function main() {
 
   if (typeof barba !== 'undefined' && typeof gsap !== 'undefined') {
     barba.init({
-      transitions: [{
-        name: 'slide-transition',
-        leave(data) {
-          return gsap.timeline()
-            .to(data.current.container, { opacity: 0, y: -50, scale: 0.95, duration: 0.5, ease: 'power2.inOut' })
-            .to(data.current.container, { display: 'none', duration: 0 });
+      transitions: [
+        {
+          name: 'slide-transition',
+          leave(data) {
+            return gsap
+              .timeline()
+              .to(data.current.container, {
+                opacity: 0,
+                y: -50,
+                scale: 0.95,
+                duration: 0.5,
+                ease: 'power2.inOut',
+              })
+              .to(data.current.container, { display: 'none', duration: 0 });
+          },
+          enter(data) {
+            gsap.set(data.next.container, { opacity: 0, y: 50, scale: 0.95, display: 'block' });
+            const ns = data.next.namespace;
+            const elements =
+              ns === 'about'
+                ? data.next.container.querySelectorAll(
+                    '.section-title, .about-intro > *, .about-details > p, .experience h3, .experience-list li, .cta-buttons .btn',
+                  )
+                : data.next.container.querySelectorAll(
+                    '.avatar-container, h1, h2, p, .btn, .card, .social-link',
+                  );
+            return gsap
+              .timeline()
+              .to(data.next.container, {
+                opacity: 1,
+                y: 0,
+                scale: 1,
+                duration: 0.6,
+                ease: 'power2.out',
+              })
+              .from(
+                elements,
+                { opacity: 0, y: 30, duration: 0.4, stagger: 0.08, ease: 'back.out(1.7)' },
+                '-=0.3',
+              );
+          },
         },
-        enter(data) {
-          gsap.set(data.next.container, { opacity: 0, y: 50, scale: 0.95, display: 'block' });
-          const ns = data.next.namespace;
-          const elements = ns === 'about'
-            ? data.next.container.querySelectorAll('.section-title, .about-intro > *, .about-details > p, .experience h3, .experience-list li, .cta-buttons .btn')
-            : data.next.container.querySelectorAll('.avatar-container, h1, h2, p, .btn, .card, .social-link');
-          return gsap.timeline()
-            .to(data.next.container, { opacity: 1, y: 0, scale: 1, duration: 0.6, ease: 'power2.out' })
-            .from(elements, { opacity: 0, y: 30, duration: 0.4, stagger: 0.08, ease: 'back.out(1.7)' }, '-=0.3');
-        }
-      }],
+      ],
       debug: false,
-      preventRunning: false
+      preventRunning: false,
     });
 
     barba.hooks.after(() => {

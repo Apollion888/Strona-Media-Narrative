@@ -1,14 +1,17 @@
 function initScrollAnimations() {
-  const scrollObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-        scrollObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 });
+  const scrollObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          scrollObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1 },
+  );
 
-  document.querySelectorAll('.anim-on-scroll').forEach(el => {
+  document.querySelectorAll('.anim-on-scroll').forEach((el) => {
     scrollObserver.observe(el);
   });
 }
@@ -34,7 +37,7 @@ function initReliableCarousel() {
     const containerWidth = carousel.offsetWidth;
     const slideWidth = slides[index].offsetWidth;
     const slideOffsetLeft = slides[index].offsetLeft;
-    return (containerWidth / 2) - slideOffsetLeft - (slideWidth / 2);
+    return containerWidth / 2 - slideOffsetLeft - slideWidth / 2;
   };
 
   const goToSlide = (index, animated = true) => {
@@ -72,7 +75,7 @@ function initReliableCarousel() {
 
     carousel.addEventListener('mouseenter', stopAutoplay);
     carousel.addEventListener('mouseleave', startAutoplay);
-    
+
     // Use a resize observer for better performance
     const resizeObserver = new ResizeObserver(() => goToSlide(currentIndex, false));
     resizeObserver.observe(carousel);
@@ -85,7 +88,7 @@ function initReliableCarousel() {
   }
 
   let loadedImages = 0;
-  images.forEach(image => {
+  images.forEach((image) => {
     if (image.complete) {
       loadedImages++;
     } else {

@@ -4,7 +4,7 @@ const ScanlineOverlay = ({ intensity = 0.1, speed = 1, enabled = true }) => {
   if (!enabled) return null;
 
   return (
-    <div 
+    <div
       className="scanline-overlay"
       style={{
         position: 'fixed',
@@ -20,7 +20,7 @@ const ScanlineOverlay = ({ intensity = 0.1, speed = 1, enabled = true }) => {
           linear-gradient(0deg, transparent 98%, rgba(0, 255, 0, 0.1) 100%)
         `,
         backgroundSize: '3px 3px',
-        animation: `scanlines ${1 / speed}s linear infinite`
+        animation: `scanlines ${1 / speed}s linear infinite`,
       }}
     />
   );

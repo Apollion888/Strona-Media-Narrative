@@ -8,44 +8,39 @@ import { motion, useReducedMotion } from 'framer-motion';
 // Performance monitoring hook
 const usePerformanceMonitor = () => {
   const [performance, setPerformance] = useState({ fps: 60, quality: 'high' });
-  
+
   useEffect(() => {
     let frameCount = 0;
     let lastTime = Date.now();
-    
+
     const measurePerformance = () => {
       frameCount++;
       const currentTime = Date.now();
-      
+
       if (currentTime - lastTime >= 1000) {
         const fps = Math.round((frameCount * 1000) / (currentTime - lastTime));
         const quality = fps > 45 ? 'high' : fps > 25 ? 'medium' : 'low';
-        
+
         setPerformance({ fps, quality });
         frameCount = 0;
         lastTime = currentTime;
       }
-      
+
       requestAnimationFrame(measurePerformance);
     };
-    
+
     measurePerformance();
   }, []);
-  
+
   return performance;
 };
 
 // Enhanced Holographic Text with performance optimization
-export const HolographicText = ({ 
-  children, 
-  className = '', 
-  intensity = 1, 
-  disabled = false 
-}) => {
+export const HolographicText = ({ children, className = '', intensity = 1, disabled = false }) => {
   const textRef = useRef(null);
   const shouldReduceMotion = useReducedMotion();
   const { quality } = usePerformanceMonitor();
-  
+
   const effectIntensity = useMemo(() => {
     if (disabled || shouldReduceMotion) return 0;
     return intensity * (quality === 'high' ? 1 : quality === 'medium' ? 0.7 : 0.4);
@@ -61,7 +56,7 @@ export const HolographicText = ({
       const time = Date.now() * 0.001;
       const hueShift = Math.sin(time * 0.5) * (15 * effectIntensity);
       const glowIntensity = 0.6 * effectIntensity;
-      
+
       element.style.filter = `
         hue-rotate(${hueShift}deg)
         drop-shadow(0 0 ${10 * effectIntensity}px rgba(0, 255, 0, ${glowIntensity}))
@@ -92,7 +87,7 @@ export const HolographicText = ({
         WebkitBackgroundClip: 'text',
         backgroundClip: 'text',
         WebkitTextFillColor: 'transparent',
-        animation: `holographic-shimmer ${3 / effectIntensity}s ease-in-out infinite`
+        animation: `holographic-shimmer ${3 / effectIntensity}s ease-in-out infinite`,
       }}
     >
       {children}
@@ -101,12 +96,12 @@ export const HolographicText = ({
 };
 
 // Enhanced Glitch Effect with performance controls
-export const GlitchText = ({ 
-  children, 
-  intensity = 0.1, 
+export const GlitchText = ({
+  children,
+  intensity = 0.1,
   active = true,
   trigger = 'auto', // 'auto', 'hover', 'manual'
-  disabled = false 
+  disabled = false,
 }) => {
   const containerRef = useRef(null);
   const [isGlitching, setIsGlitching] = useState(false);
@@ -115,12 +110,12 @@ export const GlitchText = ({
 
   const effectConfig = useMemo(() => {
     if (disabled || shouldReduceMotion) return { active: false, intensity: 0 };
-    
+
     const qualityMultiplier = quality === 'high' ? 1 : quality === 'medium' ? 0.7 : 0.4;
     return {
       active: active,
       intensity: intensity * qualityMultiplier,
-      frequency: quality === 'low' ? 8000 : quality === 'medium' ? 4000 : 2000
+      frequency: quality === 'low' ? 8000 : quality === 'medium' ? 4000 : 2000,
     };
   }, [intensity, active, quality, disabled, shouldReduceMotion]);
 
@@ -129,21 +124,21 @@ export const GlitchText = ({
 
     const container = containerRef.current;
     let glitchTimeout;
-    
+
     const createGlitch = () => {
       if (!container) return;
-      
+
       setIsGlitching(true);
       const glitchDuration = 50 + Math.random() * 150;
       const skew = (Math.random() - 0.5) * effectConfig.intensity * 5;
       const scale = 1 + (Math.random() - 0.5) * effectConfig.intensity * 0.05;
-      
+
       container.style.transform = `scaleX(${scale}) skewX(${skew}deg)`;
       container.style.filter = `
         hue-rotate(${Math.random() * 30}deg) 
         saturate(${1 + Math.random() * effectConfig.intensity})
       `;
-      
+
       setTimeout(() => {
         if (container) {
           container.style.transform = '';
@@ -151,7 +146,7 @@ export const GlitchText = ({
           setIsGlitching(false);
         }
       }, glitchDuration);
-      
+
       // Schedule next glitch
       const nextGlitch = effectConfig.frequency + Math.random() * effectConfig.frequency;
       glitchTimeout = setTimeout(createGlitch, nextGlitch);
@@ -187,7 +182,7 @@ export const GlitchText = ({
   }
 
   return (
-    <span 
+    <span
       ref={containerRef}
       className={`glitch-text ${isGlitching ? 'glitching' : ''}`}
       onMouseEnter={handleMouseEnter}
@@ -195,7 +190,7 @@ export const GlitchText = ({
       style={{
         transition: 'all 0.1s ease',
         position: 'relative',
-        display: 'inline-block'
+        display: 'inline-block',
       }}
     >
       {children}
@@ -204,14 +199,14 @@ export const GlitchText = ({
 };
 
 // Unified Particle System with adaptive performance
-export const ParticleField = ({ 
+export const ParticleField = ({
   density = 50,
   connectionDistance = 100,
   particleColor = 'rgba(0, 255, 0, 0.6)',
   connectionColor = 'rgba(0, 255, 0, 0.2)',
   interactive = true,
   disabled = false,
-  className = ''
+  className = '',
 }) => {
   const canvasRef = useRef(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -226,16 +221,16 @@ export const ParticleField = ({
     const qualityMap = {
       high: { multiplier: 1, maxParticles: density },
       medium: { multiplier: 0.7, maxParticles: Math.floor(density * 0.7) },
-      low: { multiplier: 0.4, maxParticles: Math.floor(density * 0.4) }
+      low: { multiplier: 0.4, maxParticles: Math.floor(density * 0.4) },
     };
 
     const settings = qualityMap[quality] || qualityMap.low;
-    
+
     return {
       particleCount: Math.min(settings.maxParticles, fps < 30 ? 20 : settings.maxParticles),
       connectionDistance: connectionDistance * settings.multiplier,
       animate: fps > 20,
-      interactive: interactive && fps > 25
+      interactive: interactive && fps > 25,
     };
   }, [density, connectionDistance, interactive, quality, fps, disabled, shouldReduceMotion]);
 
@@ -264,7 +259,7 @@ export const ParticleField = ({
         y: Math.random() * canvas.height,
         vx: (Math.random() - 0.5) * 0.5,
         vy: (Math.random() - 0.5) * 0.5,
-        radius: Math.random() * 2 + 1
+        radius: Math.random() * 2 + 1,
       });
     }
 
@@ -273,7 +268,7 @@ export const ParticleField = ({
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       // Update and draw particles
-      particles.forEach(particle => {
+      particles.forEach((particle) => {
         particle.x += particle.vx;
         particle.y += particle.vy;
 
@@ -286,7 +281,7 @@ export const ParticleField = ({
           const dx = mousePos.x - particle.x;
           const dy = mousePos.y - particle.y;
           const distance = Math.sqrt(dx * dx + dy * dy);
-          
+
           if (distance < 100) {
             particle.vx += dx * 0.0001;
             particle.vy += dy * 0.0001;
@@ -330,7 +325,7 @@ export const ParticleField = ({
       const rect = canvas.getBoundingClientRect();
       setMousePos({
         x: e.clientX - rect.left,
-        y: e.clientY - rect.top
+        y: e.clientY - rect.top,
       });
     };
 
@@ -358,27 +353,27 @@ export const ParticleField = ({
         width: '100%',
         height: '100%',
         pointerEvents: 'none',
-        zIndex: -1
+        zIndex: -1,
       }}
     />
   );
 };
 
 // Morphing Background Effect
-export const MorphingBackground = ({ 
+export const MorphingBackground = ({
   colors = ['#00FF00', '#0080FF', '#8000FF'],
   speed = 1,
-  disabled = false 
+  disabled = false,
 }) => {
   const shouldReduceMotion = useReducedMotion();
-  
+
   if (disabled || shouldReduceMotion) {
     return (
-      <div 
+      <div
         className="morphing-background-fallback"
         style={{
           background: colors[0] || '#00FF00',
-          opacity: 0.1
+          opacity: 0.1,
         }}
       />
     );
@@ -394,7 +389,7 @@ export const MorphingBackground = ({
         duration: 10 / speed,
         repeat: Infinity,
         repeatType: 'reverse',
-        ease: 'easeInOut'
+        ease: 'easeInOut',
       }}
       style={{
         position: 'absolute',
@@ -404,7 +399,7 @@ export const MorphingBackground = ({
         height: '100%',
         opacity: 0.1,
         zIndex: -1,
-        filter: 'blur(20px)'
+        filter: 'blur(20px)',
       }}
     />
   );
@@ -414,5 +409,5 @@ export default {
   HolographicText,
   GlitchText,
   ParticleField,
-  MorphingBackground
+  MorphingBackground,
 };

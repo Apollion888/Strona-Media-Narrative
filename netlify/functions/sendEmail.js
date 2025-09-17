@@ -7,7 +7,7 @@ exports.handler = async (event, context) => {
   const headers = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers': 'Content-Type',
-    'Access-Control-Allow-Methods': 'POST, OPTIONS'
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
   };
 
   // Handle preflight requests
@@ -15,7 +15,7 @@ exports.handler = async (event, context) => {
     return {
       statusCode: 200,
       headers,
-      body: ''
+      body: '',
     };
   }
 
@@ -24,7 +24,7 @@ exports.handler = async (event, context) => {
     return {
       statusCode: 405,
       headers,
-      body: JSON.stringify({ ok: false, error: 'Method not allowed' })
+      body: JSON.stringify({ ok: false, error: 'Method not allowed' }),
     };
   }
 
@@ -33,10 +33,10 @@ exports.handler = async (event, context) => {
     return {
       statusCode: 500,
       headers,
-      body: JSON.stringify({ 
-        ok: false, 
-        error: 'Server configuration error' 
-      })
+      body: JSON.stringify({
+        ok: false,
+        error: 'Server configuration error',
+      }),
     };
   }
 
@@ -49,10 +49,10 @@ exports.handler = async (event, context) => {
       return {
         statusCode: 400,
         headers,
-        body: JSON.stringify({ 
-          ok: false, 
-          error: 'Missing required fields: name, email, message' 
-        })
+        body: JSON.stringify({
+          ok: false,
+          error: 'Missing required fields: name, email, message',
+        }),
       };
     }
 
@@ -62,10 +62,10 @@ exports.handler = async (event, context) => {
       return {
         statusCode: 400,
         headers,
-        body: JSON.stringify({ 
-          ok: false, 
-          error: 'Invalid email format' 
-        })
+        body: JSON.stringify({
+          ok: false,
+          error: 'Invalid email format',
+        }),
       };
     }
 
@@ -74,10 +74,10 @@ exports.handler = async (event, context) => {
       return {
         statusCode: 400,
         headers,
-        body: JSON.stringify({ 
-          ok: false, 
-          error: 'Name must be between 2 and 100 characters' 
-        })
+        body: JSON.stringify({
+          ok: false,
+          error: 'Name must be between 2 and 100 characters',
+        }),
       };
     }
 
@@ -85,10 +85,10 @@ exports.handler = async (event, context) => {
       return {
         statusCode: 400,
         headers,
-        body: JSON.stringify({ 
-          ok: false, 
-          error: 'Message must be between 10 and 2000 characters' 
-        })
+        body: JSON.stringify({
+          ok: false,
+          error: 'Message must be between 10 and 2000 characters',
+        }),
       };
     }
 
@@ -107,7 +107,7 @@ exports.handler = async (event, context) => {
         <hr>
         <p><small>Sent from Media Narrative contact form</small></p>
       `,
-      reply_to: email
+      reply_to: email,
     };
 
     await resend.emails.send(emailData);
@@ -115,19 +115,18 @@ exports.handler = async (event, context) => {
     return {
       statusCode: 200,
       headers,
-      body: JSON.stringify({ ok: true })
+      body: JSON.stringify({ ok: true }),
     };
-
   } catch (error) {
     console.error('Email sending error:', error);
-    
+
     return {
       statusCode: 500,
       headers,
-      body: JSON.stringify({ 
-        ok: false, 
-        error: 'Failed to send email. Please try again later.' 
-      })
+      body: JSON.stringify({
+        ok: false,
+        error: 'Failed to send email. Please try again later.',
+      }),
     };
   }
 };

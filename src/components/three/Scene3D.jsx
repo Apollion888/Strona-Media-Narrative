@@ -1,11 +1,11 @@
 import React, { useRef, useEffect, useState } from 'react';
 import * as THREE from 'three';
 
-const Scene3D = ({ 
+const Scene3D = ({
   intensity = 0.3,
   particleCount = 150,
   enableInteraction = true,
-  className = ''
+  className = '',
 }) => {
   const mountRef = useRef(null);
   const sceneRef = useRef(null);
@@ -23,7 +23,12 @@ const Scene3D = ({
   useEffect(() => {
     if (!isWebGLSupported || !mountRef.current) return;
 
-    let scene, camera, renderer, particles, mouseX = 0, mouseY = 0;
+    let scene,
+      camera,
+      renderer,
+      particles,
+      mouseX = 0,
+      mouseY = 0;
 
     const init = () => {
       // Scene setup
@@ -35,16 +40,16 @@ const Scene3D = ({
       camera.position.z = 5;
 
       // Renderer setup
-      renderer = new THREE.WebGLRenderer({ 
-        alpha: true, 
+      renderer = new THREE.WebGLRenderer({
+        alpha: true,
         antialias: true,
-        powerPreference: "high-performance"
+        powerPreference: 'high-performance',
       });
       renderer.setSize(window.innerWidth, window.innerHeight);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
       renderer.setClearColor(0x000000, 0);
       rendererRef.current = renderer;
-      
+
       mountRef.current.appendChild(renderer.domElement);
 
       // Particle system
@@ -72,7 +77,7 @@ const Scene3D = ({
 
       for (let i = 0; i < particleCount; i++) {
         const i3 = i * 3;
-        
+
         // Random positions
         positions[i3] = (Math.random() - 0.5) * 10;
         positions[i3 + 1] = (Math.random() - 0.5) * 10;
@@ -81,11 +86,11 @@ const Scene3D = ({
         // Cyberpunk colors (green/cyan variations)
         const colorVariant = Math.random();
         if (colorVariant < 0.7) {
-          colors[i3] = 0;     // R
+          colors[i3] = 0; // R
           colors[i3 + 1] = 1; // G
           colors[i3 + 2] = Math.random() * 0.5; // B
         } else {
-          colors[i3] = 0;     // R
+          colors[i3] = 0; // R
           colors[i3 + 1] = Math.random() * 0.8 + 0.2; // G
           colors[i3 + 2] = 1; // B
         }
@@ -107,7 +112,7 @@ const Scene3D = ({
         transparent: true,
         opacity: 0.8,
         blending: THREE.AdditiveBlending,
-        sizeAttenuation: true
+        sizeAttenuation: true,
       });
 
       particles = new THREE.Points(geometry, material);
@@ -123,7 +128,7 @@ const Scene3D = ({
 
         for (let i = 0; i < particleCount; i++) {
           const i3 = i * 3;
-          
+
           // Update positions
           positions[i3] += velocities[i3];
           positions[i3 + 1] += velocities[i3 + 1];
@@ -139,7 +144,7 @@ const Scene3D = ({
             const mouseInfluence = 0.001;
             const dx = mouseX * mouseInfluence;
             const dy = mouseY * mouseInfluence;
-            
+
             velocities[i3] += dx;
             velocities[i3 + 1] -= dy;
           }
@@ -187,7 +192,7 @@ const Scene3D = ({
       if (animationIdRef.current) {
         cancelAnimationFrame(animationIdRef.current);
       }
-      
+
       if (enableInteraction) {
         document.removeEventListener('mousemove', handleMouseMove);
       }
@@ -203,7 +208,7 @@ const Scene3D = ({
           if (child.geometry) child.geometry.dispose();
           if (child.material) {
             if (Array.isArray(child.material)) {
-              child.material.forEach(material => material.dispose());
+              child.material.forEach((material) => material.dispose());
             } else {
               child.material.dispose();
             }
@@ -220,7 +225,7 @@ const Scene3D = ({
 
   if (!isWebGLSupported) {
     return (
-      <div 
+      <div
         className={`three-fallback ${className}`}
         style={{
           position: 'fixed',
@@ -230,15 +235,15 @@ const Scene3D = ({
           height: '100%',
           zIndex: -1,
           background: 'radial-gradient(ellipse at center, #0f2f0f 0%, #111111 100%)',
-          pointerEvents: 'none'
+          pointerEvents: 'none',
         }}
       />
     );
   }
 
   return (
-    <div 
-      ref={mountRef} 
+    <div
+      ref={mountRef}
       className={`three-scene ${className}`}
       style={{
         position: 'fixed',
@@ -247,7 +252,7 @@ const Scene3D = ({
         width: '100%',
         height: '100%',
         zIndex: -1,
-        pointerEvents: 'none'
+        pointerEvents: 'none',
       }}
     />
   );

@@ -33,7 +33,7 @@ const BlogPostPage = () => {
     return new Intl.DateTimeFormat('pl-PL', {
       year: 'numeric',
       month: 'long',
-      day: 'numeric'
+      day: 'numeric',
     }).format(date);
   };
 
@@ -52,13 +52,11 @@ const BlogPostPage = () => {
                   {formatDate(post.date)}
                 </time>
               </div>
-              
+
               <h1 className="blog-post-title">{post.title}</h1>
-              
-              {post.description && (
-                <p className="blog-post-description">{post.description}</p>
-              )}
-              
+
+              {post.description && <p className="blog-post-description">{post.description}</p>}
+
               {/* Tags */}
               {post.tags && post.tags.length > 0 && (
                 <div className="blog-post-tags">
@@ -86,7 +84,7 @@ const BlogPostPage = () => {
 
             {/* Post content */}
             <div className="blog-post-content">
-              <ReactMarkdown 
+              <ReactMarkdown
                 remarkPlugins={[remarkGfm]}
                 components={{
                   // Custom components for better styling
@@ -100,30 +98,41 @@ const BlogPostPage = () => {
                   ul: ({ children }) => <ul className="content-ul">{children}</ul>,
                   ol: ({ children }) => <ol className="content-ol">{children}</ol>,
                   li: ({ children }) => <li className="content-li">{children}</li>,
-                  blockquote: ({ children }) => <blockquote className="content-blockquote">{children}</blockquote>,
+                  blockquote: ({ children }) => (
+                    <blockquote className="content-blockquote">{children}</blockquote>
+                  ),
                   code: ({ inline, children, ...props }) => {
                     return inline ? (
-                      <code className="content-code-inline" {...props}>{children}</code>
+                      <code className="content-code-inline" {...props}>
+                        {children}
+                      </code>
                     ) : (
-                      <code className="content-code-block" {...props}>{children}</code>
+                      <code className="content-code-block" {...props}>
+                        {children}
+                      </code>
                     );
                   },
                   pre: ({ children }) => <pre className="content-pre">{children}</pre>,
                   a: ({ href, children }) => (
-                    <a href={href} className="content-link" target="_blank" rel="noopener noreferrer">
+                    <a
+                      href={href}
+                      className="content-link"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       {children}
                     </a>
                   ),
                   img: ({ src, alt }) => (
-                    <img 
-                      src={src} 
-                      alt={alt} 
+                    <img
+                      src={src}
+                      alt={alt}
                       className="content-img"
                       onError={(e) => {
                         e.target.style.display = 'none';
                       }}
                     />
-                  )
+                  ),
                 }}
               >
                 {post.content}

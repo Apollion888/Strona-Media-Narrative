@@ -20,7 +20,7 @@ const OptimizedImage = ({
   const generateSrcSet = (baseSrc, format) => {
     const sizes = [400, 800, 1200, 1600];
     return sizes
-      .map(size => {
+      .map((size) => {
         const formatSrc = baseSrc.replace(/\.(jpg|jpeg|png)$/i, `.${format}`);
         return `${formatSrc}?w=${size} ${size}w`;
       })
@@ -29,7 +29,7 @@ const OptimizedImage = ({
 
   // Extract base path without extension
   const basePath = src?.replace(/\.(jpg|jpeg|png)$/i, '') || '';
-  
+
   // Generate different format sources
   const avifSrcSet = generateSrcSet(src, 'avif');
   const webpSrcSet = generateSrcSet(src, 'webp');
@@ -51,7 +51,7 @@ const OptimizedImage = ({
       link.as = 'image';
       link.href = src;
       document.head.appendChild(link);
-      
+
       return () => {
         document.head.removeChild(link);
       };
@@ -71,22 +71,14 @@ const OptimizedImage = ({
           </div>
         </div>
       )}
-      
+
       <picture>
         {/* AVIF format - best compression */}
-        <source
-          srcSet={avifSrcSet}
-          sizes={sizes}
-          type="image/avif"
-        />
-        
+        <source srcSet={avifSrcSet} sizes={sizes} type="image/avif" />
+
         {/* WebP format - good compression and wide support */}
-        <source
-          srcSet={webpSrcSet}
-          sizes={sizes}
-          type="image/webp"
-        />
-        
+        <source srcSet={webpSrcSet} sizes={sizes} type="image/webp" />
+
         {/* Fallback format */}
         <motion.img
           src={src}
@@ -105,7 +97,7 @@ const OptimizedImage = ({
           style={{
             width: '100%',
             height: 'auto',
-            aspectRatio: width && height ? `${width} / ${height}` : 'auto'
+            aspectRatio: width && height ? `${width} / ${height}` : 'auto',
           }}
           {...props}
         />

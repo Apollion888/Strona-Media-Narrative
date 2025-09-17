@@ -1,9 +1,9 @@
 ---
-title: "Architecture Documentation"
-description: "System architecture, component structure, and AI development guidelines"
-version: "3.0.0"
-last_updated: "2025-09-17"
-tags: ["architecture", "components", "ai-guidelines", "integration"]
+title: 'Architecture Documentation'
+description: 'System architecture, component structure, and AI development guidelines'
+version: '3.0.0'
+last_updated: '2025-09-17'
+tags: ['architecture', 'components', 'ai-guidelines', 'integration']
 ---
 
 # Architecture Documentation {#architecture}
@@ -44,21 +44,22 @@ src/
 
 ### Technology Stack {#technology-stack}
 
-| Category | Technology | Version | Purpose |
-|----------|------------|---------|---------|
-| **Core** | React | 18.x | UI Framework |
-| **Routing** | React Router DOM | 6.x | Client-side navigation |
-| **Build** | Vite | 5.x | Development & build tool |
-| **Animation** | Framer Motion | 11.x | Advanced animations |
-| **3D Graphics** | Three.js | Latest | WebGL rendering |
-| **Visualization** | D3.js | 7.x | Data visualizations |
-| **Styling** | Pure CSS | - | No external frameworks |
+| Category          | Technology       | Version | Purpose                  |
+| ----------------- | ---------------- | ------- | ------------------------ |
+| **Core**          | React            | 18.x    | UI Framework             |
+| **Routing**       | React Router DOM | 6.x     | Client-side navigation   |
+| **Build**         | Vite             | 5.x     | Development & build tool |
+| **Animation**     | Framer Motion    | 11.x    | Advanced animations      |
+| **3D Graphics**   | Three.js         | Latest  | WebGL rendering          |
+| **Visualization** | D3.js            | 7.x     | Data visualizations      |
+| **Styling**       | Pure CSS         | -       | No external frameworks   |
 
 ## Component Architecture {#component-architecture}
 
 ### Core Components {#core-components}
 
 #### Navbar.jsx {#navbar-component}
+
 - **Purpose**: Route-aware navigation with Apple-inspired hero bar and floating menu
 - **Features**:
   - Glassmorphism top bar on the home route that mirrors macOS menu styling
@@ -72,7 +73,7 @@ const navigateToSection = (sectionId) => {
   if (location.pathname === '/') {
     // Smooth scroll to section on homepage
     document.getElementById(sectionId)?.scrollIntoView({
-      behavior: 'smooth'
+      behavior: 'smooth',
     });
   } else {
     // Navigate to homepage with section parameter
@@ -82,13 +83,13 @@ const navigateToSection = (sectionId) => {
 ```
 
 #### Page Layout Refresh (2025) {#page-layout-refresh}
+
 - **HomePage.jsx**: hero w stylu Apple, listy danych dla portfolio i uslug oraz marquee z haslami.
 - **AboutPage.jsx**: sticky carousel, modularne karty umiejetnosci i timeline doswiadczenia.
 - **BlogPage.jsx**: panel Netlify CMS w stylu glass, bez inline styles i z nowym guidance.
 
-
-
 #### Particles.jsx {#particles-component}
+
 - **Purpose**: Canvas-based particle animation background
 - **Features**:
   - Mouse interaction with particle movement
@@ -116,19 +117,22 @@ class ParticleSystem {
 ### Advanced Components {#advanced-components}
 
 #### MotionWrapper.jsx {#motion-wrapper}
+
 - **Purpose**: Reusable Framer Motion animation wrapper
 - **Variants**: fadeInUp, scaleIn, slideInLeft, slideInRight, cyberpunkGlow, glitchEffect
 - **Usage**: Consistent animations across the application
 
 #### Scene3D.jsx {#scene3d-component}
+
 - **Purpose**: Three.js WebGL particle system
-- **Features**: 
+- **Features**:
   - WebGL support detection
   - Mouse interaction physics
   - Performance monitoring
   - Proper cleanup and disposal
 
 #### DataVisualization.jsx {#data-visualization}
+
 - **Purpose**: D3.js powered interactive charts
 - **Supported Types**: Timeline, bar charts, network graphs
 - **Features**: Responsive design, cyberpunk styling
@@ -138,18 +142,21 @@ class ParticleSystem {
 ### Autonomy Principles {#autonomy-principles}
 
 #### Technical Decision Authority {#technical-authority}
+
 - **Full Autonomy**: Make independent technical decisions
 - **Technology Choices**: WebGL, Canvas, CSS animations, shaders
 - **Architecture Patterns**: Component design, state management, hooks
 - **Performance Optimization**: Memory management, lazy loading, rendering
 
 #### Innovation Requirements {#innovation-requirements}
+
 - **Ambitious Effects**: Create spectacular visual experiences
 - **Cutting-Edge Techniques**: Use latest Canvas API, modern CSS
 - **Creative Solutions**: Unique interactive elements
 - **Performance Innovation**: Efficient algorithms, optimized rendering
 
 #### Prohibited Behaviors {#prohibited-behaviors}
+
 - ❌ Asking permission for standard implementations
 - ❌ Limiting to "simple" solutions when advanced possible
 - ❌ Avoiding experiments due to "safety" concerns
@@ -158,6 +165,7 @@ class ParticleSystem {
 ### Quality Standards {#quality-standards}
 
 #### Performance Requirements {#performance-requirements}
+
 - **Frame Rate**: 60+ FPS on mid-range devices (target 120 FPS)
 - **Responsiveness**: Smooth across all screen sizes
 - **Graceful Degradation**: Fallbacks for older browsers
@@ -165,6 +173,7 @@ class ParticleSystem {
 - **Accessibility**: Respect `prefers-reduced-motion`
 
 #### Development Standards {#development-standards}
+
 1. **Minimal Dependencies**: Avoid unnecessary external libraries
 2. **Pure CSS**: Use CSS instead of styling libraries
 3. **Component Simplicity**: Keep components focused and functional
@@ -176,10 +185,15 @@ class ParticleSystem {
 ### Framer Motion Integration {#framer-motion-integration}
 
 #### Component Enhancement {#component-enhancement}
+
 ```javascript
 // Before - Standard React component
 const BlogCard = ({ children, ...props }) => {
-  return <div className="blog-card" {...props}>{children}</div>;
+  return (
+    <div className="blog-card" {...props}>
+      {children}
+    </div>
+  );
 };
 
 // After - Framer Motion enhanced
@@ -187,11 +201,11 @@ import { motion } from 'framer-motion';
 
 const BlogCard = ({ children, ...props }) => {
   return (
-    <motion.div 
+    <motion.div
       className="blog-card"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
+      transition={{ duration: 0.6, ease: 'easeOut' }}
       whileHover={{ scale: 1.02, y: -4 }}
       {...props}
     >
@@ -204,6 +218,7 @@ const BlogCard = ({ children, ...props }) => {
 ### Three.js Integration {#threejs-integration}
 
 #### WebGL Detection Pattern {#webgl-detection}
+
 ```javascript
 const WebGLScene = () => {
   const [webGLSupported, setWebGLSupported] = useState(false);
@@ -225,21 +240,23 @@ const WebGLScene = () => {
 ### D3.js Integration {#d3-integration}
 
 #### React-D3 Hybrid Approach {#react-d3-hybrid}
+
 ```javascript
 const D3Visualization = ({ data }) => {
   const svgRef = useRef();
 
   useEffect(() => {
     const svg = d3.select(svgRef.current);
-    
+
     // D3 handles data binding and animation
-    svg.selectAll('.data-point')
+    svg
+      .selectAll('.data-point')
       .data(data)
       .join('circle')
       .attr('class', 'data-point')
       .transition()
       .duration(750)
-      .attr('r', d => d.value);
+      .attr('r', (d) => d.value);
   }, [data]);
 
   return <svg ref={svgRef} />;
@@ -249,6 +266,7 @@ const D3Visualization = ({ data }) => {
 ## Error Handling {#error-handling}
 
 ### Error Boundaries {#error-boundaries}
+
 ```javascript
 class ComponentErrorBoundary extends React.Component {
   constructor(props) {
@@ -275,6 +293,7 @@ class ComponentErrorBoundary extends React.Component {
 ```
 
 ### Graceful Degradation {#graceful-degradation}
+
 - **WebGL Fallback**: Canvas 2D for unsupported browsers
 - **Animation Fallback**: CSS transitions when JS disabled
 - **Font Fallback**: System fonts when web fonts fail
@@ -284,5 +303,3 @@ class ComponentErrorBoundary extends React.Component {
 
 **Last Updated**: September 17, 2025  
 **Version**: 3.0.0
-
-

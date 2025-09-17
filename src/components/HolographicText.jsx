@@ -12,7 +12,7 @@ const HolographicText = ({ children, className = '' }) => {
     const animate = () => {
       const time = Date.now() * 0.001;
       const hueShift = Math.sin(time * 0.5) * 15;
-      
+
       element.style.filter = `
         hue-rotate(${hueShift}deg)
         drop-shadow(0 0 10px rgba(50, 217, 4, 0.65))
@@ -41,7 +41,7 @@ const HolographicText = ({ children, className = '' }) => {
         WebkitBackgroundClip: 'text',
         backgroundClip: 'text',
         WebkitTextFillColor: 'transparent',
-        animation: 'holographic-shimmer 3s ease-in-out infinite'
+        animation: 'holographic-shimmer 3s ease-in-out infinite',
       }}
     >
       {children}

@@ -15,9 +15,10 @@
   perspective: 1000px;
   opacity: 0;
   transform: translateY(10px) scale(0.96);
-  transition: opacity 220ms cubic-bezier(0.18, 0.6, 0.32, 1),
-              transform 220ms cubic-bezier(0.18, 0.6, 0.32, 1),
-              visibility 220ms ease;
+  transition:
+    opacity 220ms cubic-bezier(0.18, 0.6, 0.32, 1),
+    transform 220ms cubic-bezier(0.18, 0.6, 0.32, 1),
+    visibility 220ms ease;
   visibility: hidden;
 }
 
@@ -69,7 +70,10 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: transform 160ms ease, background 160ms ease, border 160ms ease;
+  transition:
+    transform 160ms ease,
+    background 160ms ease,
+    border 160ms ease;
 }
 
 .window-close:hover {
@@ -96,7 +100,11 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   cursor: pointer;
-  transition: background 180ms ease, color 180ms ease, transform 180ms ease, padding 180ms ease;
+  transition:
+    background 180ms ease,
+    color 180ms ease,
+    transform 180ms ease,
+    padding 180ms ease;
   border-radius: 14px;
 }
 

@@ -9,12 +9,11 @@ const STATUS_STEPS = [
   { limit: 62, message: 'Harmonizuje neonowe gradienty...' },
   { limit: 84, message: 'Stabilizuje sciezki ruchu...' },
   { limit: 100, message: 'Lacze sie ze scena glowna...' },
-  { limit: Infinity, message: 'Media Narrative jest gotowe.' }
+  { limit: Infinity, message: 'Media Narrative jest gotowe.' },
 ];
 
 const HEADLINE_WORDS = ['PASJA', 'FORMA', 'EFEKT'];
 const HEADLINE_INTERVAL = 900;
-
 
 const LoadingScreen = ({ onComplete, duration = 2600 }) => {
   const [phase, setPhase] = useState('intro');
@@ -122,7 +121,8 @@ const LoadingScreen = ({ onComplete, duration = 2600 }) => {
   const progressRatio = Math.min(progress, 100) / 100;
   const formattedProgress = String(progress).padStart(2, '0');
   const statusLabel = useMemo(() => {
-    const step = STATUS_STEPS.find((item) => progress < item.limit) ?? STATUS_STEPS[STATUS_STEPS.length - 1];
+    const step =
+      STATUS_STEPS.find((item) => progress < item.limit) ?? STATUS_STEPS[STATUS_STEPS.length - 1];
     return step.message;
   }, [progress]);
 

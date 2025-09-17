@@ -7,7 +7,9 @@ const NotFoundPage = () => {
   useEffect(() => {
     // Simple CSS animations instead of GSAP
     if (notFoundRef.current) {
-      const elements = notFoundRef.current.querySelectorAll('.error-code, .error-title, .error-description, .home-button');
+      const elements = notFoundRef.current.querySelectorAll(
+        '.error-code, .error-title, .error-description, .home-button',
+      );
       elements.forEach((el, index) => {
         setTimeout(() => {
           el.style.opacity = '1';
@@ -25,7 +27,8 @@ const NotFoundPage = () => {
         </div>
         <h1 className="error-title neon-text mb-4">Strona nie znaleziona</h1>
         <p className="error-description lead mb-5">
-          Przepraszamy, ale strona której szukasz nie istnieje.<br />
+          Przepraszamy, ale strona której szukasz nie istnieje.
+          <br />
           Może została przeniesiona, usunięta lub nigdy nie istniała.
         </p>
         <div className="home-button">
@@ -33,7 +36,7 @@ const NotFoundPage = () => {
             Wróć do strony głównej
           </Link>
         </div>
-        
+
         <div className="mt-5">
           <div className="row justify-content-center">
             <div className="col-md-8">

@@ -10,40 +10,41 @@ const NeuralTimeline = ({ posts = [] }) => {
   const samplePosts = [
     {
       id: 1,
-      title: "AI w Fotografii: Rewolucja czy Ewolucja?",
-      date: "2024-09-10",
-      category: "AI & Tech",
-      preview: "Jak sztuczna inteligencja zmienia sposób, w jaki tworzymy i postrzegamy fotografię...",
-      readTime: "5 min",
-      status: "published"
+      title: 'AI w Fotografii: Rewolucja czy Ewolucja?',
+      date: '2024-09-10',
+      category: 'AI & Tech',
+      preview:
+        'Jak sztuczna inteligencja zmienia sposób, w jaki tworzymy i postrzegamy fotografię...',
+      readTime: '5 min',
+      status: 'published',
     },
     {
       id: 2,
-      title: "Neural Networks w Post-produkcji",
-      date: "2024-09-08",
-      category: "Tutorial",
-      preview: "Praktyczne zastosowanie sieci neuronowych w obróbce zdjęć i wideo...",
-      readTime: "8 min",
-      status: "published"
+      title: 'Neural Networks w Post-produkcji',
+      date: '2024-09-08',
+      category: 'Tutorial',
+      preview: 'Praktyczne zastosowanie sieci neuronowych w obróbce zdjęć i wideo...',
+      readTime: '8 min',
+      status: 'published',
     },
     {
       id: 3,
-      title: "Quantum Computing dla Kreatywnych",
-      date: "2024-09-05",
-      category: "Future Tech",
-      preview: "Jak obliczenia kwantowe mogą wpłynąć na przyszłość branży kreatywnej...",
-      readTime: "12 min",
-      status: "draft"
+      title: 'Quantum Computing dla Kreatywnych',
+      date: '2024-09-05',
+      category: 'Future Tech',
+      preview: 'Jak obliczenia kwantowe mogą wpłynąć na przyszłość branży kreatywnej...',
+      readTime: '12 min',
+      status: 'draft',
     },
     {
       id: 4,
-      title: "Holographic Displays - Media 3.0",
-      date: "2024-09-01",
-      category: "Innovation",
-      preview: "Przyszłość wyświetlaczy holograficznych w mediach i reklamie...",
-      readTime: "6 min",
-      status: "coming-soon"
-    }
+      title: 'Holographic Displays - Media 3.0',
+      date: '2024-09-01',
+      category: 'Innovation',
+      preview: 'Przyszłość wyświetlaczy holograficznych w mediach i reklamie...',
+      readTime: '6 min',
+      status: 'coming-soon',
+    },
   ];
 
   const blogPosts = posts.length > 0 ? posts : samplePosts;
@@ -60,7 +61,7 @@ const NeuralTimeline = ({ posts = [] }) => {
     // Neural network nodes
     const nodes = [];
     const connections = [];
-    
+
     // Create nodes for each blog post
     blogPosts.forEach((post, index) => {
       const angle = (index / blogPosts.length) * Math.PI * 2;
@@ -78,7 +79,7 @@ const NeuralTimeline = ({ posts = [] }) => {
         pulsePhase: Math.random() * Math.PI * 2,
         connections: [],
         post,
-        active: false
+        active: false,
       });
     });
 
@@ -97,7 +98,7 @@ const NeuralTimeline = ({ posts = [] }) => {
         pulsePhase: Math.random() * Math.PI * 2,
         connections: [],
         type: 'floating',
-        active: false
+        active: false,
       });
     }
 
@@ -105,12 +106,12 @@ const NeuralTimeline = ({ posts = [] }) => {
       const rect = container.getBoundingClientRect();
       canvas.width = rect.width;
       canvas.height = rect.height;
-      
+
       // Recalculate positions
       blogPosts.forEach((post, index) => {
         const angle = (index / blogPosts.length) * Math.PI * 2;
         const radius = 150;
-        const node = nodes.find(n => n.id === post.id);
+        const node = nodes.find((n) => n.id === post.id);
         if (node) {
           node.baseX = canvas.width / 2 + Math.cos(angle) * radius;
           node.baseY = canvas.height / 2 + Math.sin(angle) * radius;
@@ -125,7 +126,7 @@ const NeuralTimeline = ({ posts = [] }) => {
       const rect = container.getBoundingClientRect();
       setMousePos({
         x: e.clientX - rect.left,
-        y: e.clientY - rect.top
+        y: e.clientY - rect.top,
       });
     };
 
@@ -141,13 +142,13 @@ const NeuralTimeline = ({ posts = [] }) => {
         const dx = mousePos.x - node.x;
         const dy = mousePos.y - node.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
-        
+
         if (distance < 100) {
           const force = (100 - distance) / 100;
           node.vx += (dx / distance) * force * 0.02;
           node.vy += (dy / distance) * force * 0.02;
           node.active = true;
-          
+
           if (distance < 50 && node.post) {
             setActiveNode(index);
           }
@@ -184,22 +185,24 @@ const NeuralTimeline = ({ posts = [] }) => {
           const dx = n1.x - n2.x;
           const dy = n1.y - n2.y;
           const distance = Math.sqrt(dx * dx + dy * dy);
-          
+
           if (distance < 120) {
             connections.push({
-              n1, n2, distance,
+              n1,
+              n2,
+              distance,
               strength: (120 - distance) / 120,
-              active: n1.active || n2.active
+              active: n1.active || n2.active,
             });
           }
         }
       }
 
       // Draw connections (subtle)
-      connections.forEach(conn => {
+      connections.forEach((conn) => {
         const alpha = conn.strength * 0.15 * (conn.active ? 1.6 : 1);
         const width = 0.5 + conn.strength * (conn.active ? 1.2 : 0.8);
-        
+
         ctx.strokeStyle = `rgba(160, 255, 160, ${alpha})`;
         ctx.lineWidth = width;
         ctx.beginPath();
@@ -212,7 +215,7 @@ const NeuralTimeline = ({ posts = [] }) => {
           const flowPos = (time * 2) % 1;
           const flowX = conn.n1.x + (conn.n2.x - conn.n1.x) * flowPos;
           const flowY = conn.n1.y + (conn.n2.y - conn.n1.y) * flowPos;
-          
+
           ctx.fillStyle = `rgba(160, 255, 200, 0.6)`;
           ctx.beginPath();
           ctx.arc(flowX, flowY, 1.5, 0, Math.PI * 2);
@@ -225,11 +228,11 @@ const NeuralTimeline = ({ posts = [] }) => {
         const pulse = Math.sin(node.pulsePhase) * 0.3 + 0.7;
         const size = node.size * pulse * (node.active ? 1.5 : 1);
         const energy = Math.sin(node.energy) * 0.5 + 0.5;
-        
+
         // Node glow (soft)
         ctx.shadowColor = node.post ? 'rgba(160, 255, 160, 0.9)' : 'rgba(160, 255, 200, 0.8)';
         ctx.shadowBlur = node.active ? 12 : 6;
-        
+
         // Outer ring for blog posts
         if (node.post) {
           ctx.strokeStyle = `rgba(160, 255, 160, ${0.5 + energy * 0.2})`;
@@ -237,34 +240,35 @@ const NeuralTimeline = ({ posts = [] }) => {
           ctx.beginPath();
           ctx.arc(node.x, node.y, size + 8, 0, Math.PI * 2);
           ctx.stroke();
-          
+
           // Status indicator
-          const statusColor = {
-            'published': '#a0ffa0',
-            'draft': '#fff1a6',
-            'coming-soon': '#ffd699'
-          }[node.post.status] || '#a0ffa0';
-          
+          const statusColor =
+            {
+              published: '#a0ffa0',
+              draft: '#fff1a6',
+              'coming-soon': '#ffd699',
+            }[node.post.status] || '#a0ffa0';
+
           ctx.fillStyle = statusColor;
           ctx.beginPath();
           ctx.arc(node.x + size + 5, node.y - size - 5, 2, 0, Math.PI * 2);
           ctx.fill();
         }
-        
+
         // Main node
-        ctx.fillStyle = node.post ? 
-          `rgba(160, 255, 160, ${0.6 + energy * 0.2})` : 
-          `rgba(160, 255, 200, ${0.5 + energy * 0.3})`;
+        ctx.fillStyle = node.post
+          ? `rgba(160, 255, 160, ${0.6 + energy * 0.2})`
+          : `rgba(160, 255, 200, ${0.5 + energy * 0.3})`;
         ctx.beginPath();
         ctx.arc(node.x, node.y, size, 0, Math.PI * 2);
         ctx.fill();
-        
+
         // Inner core
         ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
         ctx.beginPath();
         ctx.arc(node.x, node.y, size * 0.3, 0, Math.PI * 2);
         ctx.fill();
-        
+
         ctx.shadowBlur = 0;
       });
 
@@ -292,7 +296,7 @@ const NeuralTimeline = ({ posts = [] }) => {
 
   return (
     <div className="neural-timeline" style={{ position: 'relative', padding: '4rem 0' }}>
-      <div 
+      <div
         ref={containerRef}
         style={{
           position: 'relative',
@@ -301,7 +305,7 @@ const NeuralTimeline = ({ posts = [] }) => {
           borderRadius: '18px',
           overflow: 'hidden',
           border: '1px solid rgba(255, 255, 255, 0.08)',
-          backdropFilter: 'saturate(120%) blur(10px)'
+          backdropFilter: 'saturate(120%) blur(10px)',
         }}
       >
         <canvas
@@ -312,10 +316,10 @@ const NeuralTimeline = ({ posts = [] }) => {
             left: 0,
             width: '100%',
             height: '100%',
-            cursor: 'default'
+            cursor: 'default',
           }}
         />
-        
+
         {/* Active Post Preview */}
         {activeNode >= 0 && blogPosts[activeNode] && (
           <div
@@ -332,43 +336,51 @@ const NeuralTimeline = ({ posts = [] }) => {
               boxShadow: '0 8px 24px rgba(0, 0, 0, 0.35)',
               backdropFilter: 'saturate(120%) blur(12px)',
               animation: 'nodePreviewFade 0.4s ease-out',
-              zIndex: 10
+              zIndex: 10,
             }}
           >
-            <div style={{
-              color: 'rgba(160, 255, 160, 0.9)',
-              fontSize: '0.8rem',
-              marginBottom: '0.5rem',
-              textTransform: 'uppercase',
-              letterSpacing: '1px'
-            }}>
+            <div
+              style={{
+                color: 'rgba(160, 255, 160, 0.9)',
+                fontSize: '0.8rem',
+                marginBottom: '0.5rem',
+                textTransform: 'uppercase',
+                letterSpacing: '1px',
+              }}
+            >
               {blogPosts[activeNode].category} • {blogPosts[activeNode].readTime}
             </div>
-            <h3 style={{
-              color: '#d6ffd6',
-              fontSize: '1.1rem',
-              marginBottom: '0.5rem',
-              lineHeight: '1.3'
-            }}>
+            <h3
+              style={{
+                color: '#d6ffd6',
+                fontSize: '1.1rem',
+                marginBottom: '0.5rem',
+                lineHeight: '1.3',
+              }}
+            >
               {blogPosts[activeNode].title}
             </h3>
-            <p style={{
-              color: 'rgba(235, 245, 235, 0.8)',
-              fontSize: '0.9rem',
-              lineHeight: '1.4',
-              marginBottom: '0.5rem'
-            }}>
+            <p
+              style={{
+                color: 'rgba(235, 245, 235, 0.8)',
+                fontSize: '0.9rem',
+                lineHeight: '1.4',
+                marginBottom: '0.5rem',
+              }}
+            >
               {blogPosts[activeNode].preview}
             </p>
-            <div style={{
-              color: 'rgba(160, 255, 160, 0.9)',
-              fontSize: '0.8rem'
-            }}>
+            <div
+              style={{
+                color: 'rgba(160, 255, 160, 0.9)',
+                fontSize: '0.8rem',
+              }}
+            >
               {new Date(blogPosts[activeNode].date).toLocaleDateString('pl-PL')}
             </div>
           </div>
         )}
-        
+
         {/* Instructions */}
         <div
           style={{
@@ -377,7 +389,7 @@ const NeuralTimeline = ({ posts = [] }) => {
             left: '20px',
             color: 'rgba(255, 255, 255, 0.45)',
             fontSize: '0.85rem',
-            fontFamily: 'system-ui, -apple-system, sans-serif'
+            fontFamily: 'system-ui, -apple-system, sans-serif',
           }}
         >
           Hover nodes to preview

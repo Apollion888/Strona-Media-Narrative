@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
 import { motion, useMotionValue, useTransform } from 'framer-motion';
 
-const InteractiveCard = ({ 
-  children, 
+const InteractiveCard = ({
+  children,
   className = '',
   glowEffect = true,
   tiltEffect = true,
   magneticEffect = false,
-  ...props 
+  ...props
 }) => {
   const [isHovered, setIsHovered] = useState(false);
-  
+
   // Motion values dla mouse tracking
   const x = useMotionValue(0);
   const y = useMotionValue(0);
-  
+
   // Transforms dla 3D effects
   const rotateX = useTransform(y, [-300, 300], [10, -10]);
   const rotateY = useTransform(x, [-300, 300], [-10, 10]);
@@ -22,11 +22,11 @@ const InteractiveCard = ({
 
   const handleMouseMove = (event) => {
     if (!tiltEffect && !magneticEffect) return;
-    
+
     const rect = event.currentTarget.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
-    
+
     x.set(event.clientX - centerX);
     y.set(event.clientY - centerY);
   };
@@ -42,18 +42,18 @@ const InteractiveCard = ({
       className={`interactive-card ${className}`}
       style={{
         perspective: 1000,
-        transformStyle: 'preserve-3d'
+        transformStyle: 'preserve-3d',
       }}
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={handleMouseLeave}
       whileHover={{
         scale: magneticEffect ? 1.05 : 1.02,
-        transition: { duration: 0.3, ease: "easeOut" }
+        transition: { duration: 0.3, ease: 'easeOut' },
       }}
       whileTap={{
         scale: 0.98,
-        transition: { duration: 0.1 }
+        transition: { duration: 0.1 },
       }}
       {...props}
     >
@@ -62,12 +62,12 @@ const InteractiveCard = ({
           rotateX: tiltEffect ? rotateX : 0,
           rotateY: tiltEffect ? rotateY : 0,
           scale: tiltEffect ? scale : 1,
-          transformStyle: 'preserve-3d'
+          transformStyle: 'preserve-3d',
         }}
         transition={{
-          type: "spring",
+          type: 'spring',
           damping: 20,
-          stiffness: 300
+          stiffness: 300,
         }}
       >
         {/* Glow effect layer */}
@@ -86,11 +86,11 @@ const InteractiveCard = ({
               background: 'linear-gradient(45deg, #00ff0020, #00ffff20, #00ff0020)',
               borderRadius: 'inherit',
               zIndex: -1,
-              filter: 'blur(8px)'
+              filter: 'blur(8px)',
             }}
           />
         )}
-        
+
         {/* Card content */}
         <motion.div
           style={{
@@ -98,17 +98,17 @@ const InteractiveCard = ({
             width: '100%',
             height: '100%',
             borderRadius: 'inherit',
-            overflow: 'hidden'
+            overflow: 'hidden',
           }}
           animate={{
-            boxShadow: isHovered 
+            boxShadow: isHovered
               ? '0 20px 40px rgba(0, 255, 0, 0.1), 0 0 20px rgba(0, 255, 255, 0.1)'
-              : '0 8px 16px rgba(0, 0, 0, 0.2)'
+              : '0 8px 16px rgba(0, 0, 0, 0.2)',
           }}
           transition={{ duration: 0.3 }}
         >
           {children}
-          
+
           {/* Shine effect overlay */}
           {isHovered && (
             <motion.div
@@ -116,8 +116,8 @@ const InteractiveCard = ({
               animate={{ x: '100%', opacity: [0, 1, 0] }}
               transition={{
                 duration: 0.8,
-                ease: "easeInOut",
-                delay: 0.2
+                ease: 'easeInOut',
+                delay: 0.2,
               }}
               style={{
                 position: 'absolute',
@@ -125,9 +125,10 @@ const InteractiveCard = ({
                 left: 0,
                 right: 0,
                 bottom: 0,
-                background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent)',
+                background:
+                  'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent)',
                 pointerEvents: 'none',
-                transform: 'skewX(-15deg)'
+                transform: 'skewX(-15deg)',
               }}
             />
           )}

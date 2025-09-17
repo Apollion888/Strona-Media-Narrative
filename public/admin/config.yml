@@ -6,35 +6,33 @@ media_folder: public/images/blog
 public_folder: /images/blog
 
 collections:
-  - name: "blog"
-    label: "Blog Posts"
-    folder: "content/blog"
+  - name: blog
+    label: Blog
+    folder: content/blog
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Publish Date", name: "date", widget: "datetime" }
-      - { label: "Description", name: "description", widget: "string" }
-      - { label: "Cover Image", name: "cover", widget: "image", required: false }
-      - { label: "Tags", name: "tags", widget: "list", default: ["tech"] }
-      - { label: "Featured", name: "featured", widget: "boolean", default: false }
-      - { label: "Body", name: "body", widget: "markdown" }
-      
-  - name: "pages"
-    label: "Pages"
+      - { name: title, label: Tytuł }
+      - { name: date, label: Data, widget: datetime }
+      - { name: tags, label: Tagi, widget: list }
+      - { name: excerpt, label: Zajawka, widget: text, required: false }
+      - { name: body, label: Treść, widget: markdown }
+
+  - name: 'pages'
+    label: 'Pages'
     files:
-      - label: "About Page"
-        name: "about"
-        file: "content/pages/about.md"
+      - label: 'About Page'
+        name: 'about'
+        file: 'content/pages/about.md'
         fields:
-          - { label: "Title", name: "title", widget: "string" }
-          - { label: "Body", name: "body", widget: "markdown" }
-      - label: "Home Page"
-        name: "home"
-        file: "content/pages/home.md" 
+          - { label: 'Title', name: 'title', widget: 'string' }
+          - { label: 'Body', name: 'body', widget: 'markdown' }
+      - label: 'Home Page'
+        name: 'home'
+        file: 'content/pages/home.md'
         fields:
-          - { label: "Title", name: "title", widget: "string" }
-          - { label: "Hero Title", name: "heroTitle", widget: "string" }
-          - { label: "Hero Subtitle", name: "heroSubtitle", widget: "string" }
-          - { label: "Hero Description", name: "heroDescription", widget: "text" }
-          - { label: "Body", name: "body", widget: "markdown" }
+          - { label: 'Title', name: 'title', widget: 'string' }
+          - { label: 'Hero Title', name: 'heroTitle', widget: 'string' }
+          - { label: 'Hero Subtitle', name: 'heroSubtitle', widget: 'string' }
+          - { label: 'Hero Description', name: 'heroDescription', widget: 'text' }
+          - { label: 'Body', name: 'body', widget: 'markdown' }

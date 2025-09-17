@@ -26,7 +26,7 @@ const CyberpunkStaticBackground = () => {
           type: 'horizontal',
           y: (canvas.height / 8) * i,
           opacity: 0.02 + Math.random() * 0.03,
-          pulse: Math.random() * Math.PI * 2
+          pulse: Math.random() * Math.PI * 2,
         });
       }
 
@@ -36,7 +36,7 @@ const CyberpunkStaticBackground = () => {
           type: 'vertical',
           x: (canvas.width / 12) * i,
           opacity: 0.02 + Math.random() * 0.03,
-          pulse: Math.random() * Math.PI * 2
+          pulse: Math.random() * Math.PI * 2,
         });
       }
 
@@ -46,7 +46,7 @@ const CyberpunkStaticBackground = () => {
           y: Math.random() * canvas.height,
           speed: 0.3 + Math.random() * 0.2,
           opacity: 0.06 + Math.random() * 0.04,
-          width: 1 + Math.random() * 2
+          width: 1 + Math.random() * 2,
         });
       }
     };
@@ -62,9 +62,9 @@ const CyberpunkStaticBackground = () => {
 
     const drawStaticGrid = (time) => {
       // Draw subtle grid lines
-      gridLines.forEach(line => {
+      gridLines.forEach((line) => {
         const pulseOpacity = line.opacity + Math.sin(time * 0.002 + line.pulse) * 0.01;
-        
+
         if (line.type === 'horizontal') {
           ctx.strokeStyle = `rgba(0, 255, 0, ${pulseOpacity})`;
           ctx.lineWidth = 0.5;
@@ -84,7 +84,7 @@ const CyberpunkStaticBackground = () => {
     };
 
     const drawScanLines = (time) => {
-      scanLines.forEach(line => {
+      scanLines.forEach((line) => {
         // Move scan line
         line.y += line.speed;
         if (line.y > canvas.height + 50) {
@@ -98,7 +98,7 @@ const CyberpunkStaticBackground = () => {
         gradient.addColorStop(1, 'transparent');
 
         ctx.fillStyle = gradient;
-        ctx.fillRect(0, line.y - line.width/2, canvas.width, line.width);
+        ctx.fillRect(0, line.y - line.width / 2, canvas.width, line.width);
       });
     };
 
@@ -108,23 +108,17 @@ const CyberpunkStaticBackground = () => {
         { x: 0, y: 0 },
         { x: canvas.width, y: 0 },
         { x: 0, y: canvas.height },
-        { x: canvas.width, y: canvas.height }
+        { x: canvas.width, y: canvas.height },
       ];
 
       corners.forEach((corner, index) => {
-        const pulse = Math.sin(time * 0.001 + index * Math.PI / 2) * 0.02 + 0.03;
-        const gradient = ctx.createRadialGradient(
-          corner.x, corner.y, 0,
-          corner.x, corner.y, 200
-        );
+        const pulse = Math.sin(time * 0.001 + (index * Math.PI) / 2) * 0.02 + 0.03;
+        const gradient = ctx.createRadialGradient(corner.x, corner.y, 0, corner.x, corner.y, 200);
         gradient.addColorStop(0, `rgba(0, 255, 0, ${pulse})`);
         gradient.addColorStop(1, 'transparent');
 
         ctx.fillStyle = gradient;
-        ctx.fillRect(
-          corner.x - 200, corner.y - 200,
-          400, 400
-        );
+        ctx.fillRect(corner.x - 200, corner.y - 200, 400, 400);
       });
     };
 
@@ -140,7 +134,7 @@ const CyberpunkStaticBackground = () => {
       nodePositions.forEach((pos, index) => {
         const pulse = Math.sin(time * 0.003 + index) * 0.3 + 0.7;
         const size = 2 * pulse;
-        
+
         ctx.fillStyle = `rgba(0, 255, 0, ${0.4 * pulse})`;
         ctx.beginPath();
         ctx.arc(pos.x, pos.y, size, 0, Math.PI * 2);
@@ -156,7 +150,7 @@ const CyberpunkStaticBackground = () => {
 
     const animate = () => {
       time += 1;
-      
+
       // Clear with very subtle fade
       ctx.fillStyle = 'rgba(17, 17, 17, 0.02)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -182,10 +176,10 @@ const CyberpunkStaticBackground = () => {
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     setIsVisible(!mediaQuery.matches);
-    
+
     const handleChange = () => setIsVisible(!mediaQuery.matches);
     mediaQuery.addListener?.(handleChange);
-    
+
     return () => mediaQuery.removeListener?.(handleChange);
   }, []);
 

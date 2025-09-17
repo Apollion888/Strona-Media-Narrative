@@ -8,20 +8,20 @@ const GlitchEffect = ({ children, intensity = 0.1, active = false }) => {
     if (!active || !containerRef.current) return;
 
     const container = containerRef.current;
-    
+
     const createGlitch = () => {
       // Random glitch parameters
       const glitchDuration = 50 + Math.random() * 200;
       const skew = (Math.random() - 0.5) * intensity * 5;
       const scale = 1 + (Math.random() - 0.5) * intensity * 0.05;
-      
+
       // Apply glitch effect
       container.style.transform = `scaleX(${scale}) skewX(${skew}deg)`;
       container.style.filter = `
         hue-rotate(${Math.random() * 30}deg) 
         saturate(${1 + Math.random() * intensity})
       `;
-      
+
       setTimeout(() => {
         container.style.transform = '';
         container.style.filter = '';
@@ -46,11 +46,11 @@ const GlitchEffect = ({ children, intensity = 0.1, active = false }) => {
   }, [active, intensity]);
 
   return (
-    <div 
+    <div
       ref={containerRef}
       style={{
         transition: 'all 0.1s ease',
-        position: 'relative'
+        position: 'relative',
       }}
     >
       {children}

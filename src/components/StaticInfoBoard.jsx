@@ -6,56 +6,57 @@ const StaticInfoBoard = ({ posts = [] }) => {
   const samplePosts = [
     {
       id: 1,
-      title: "AI w Fotografii: Rewolucja czy Ewolucja?",
-      date: "2024-09-10",
-      category: "AI & Tech",
-      preview: "Jak sztuczna inteligencja zmienia sposób, w jaki tworzymy i postrzegamy fotografię...",
-      readTime: "5 min",
-      status: "published",
+      title: 'AI w Fotografii: Rewolucja czy Ewolucja?',
+      date: '2024-09-10',
+      category: 'AI & Tech',
+      preview:
+        'Jak sztuczna inteligencja zmienia sposób, w jaki tworzymy i postrzegamy fotografię...',
+      readTime: '5 min',
+      status: 'published',
       featured: true,
-      author: "Media Narrative",
+      author: 'Media Narrative',
       views: 1247,
-      engagement: 89
+      engagement: 89,
     },
     {
       id: 2,
-      title: "Neural Networks w Post-produkcji",
-      date: "2024-09-08",
-      category: "Tutorial",
-      preview: "Praktyczne zastosowanie sieci neuronowych w obróbce zdjęć i wideo...",
-      readTime: "8 min",
-      status: "published",
+      title: 'Neural Networks w Post-produkcji',
+      date: '2024-09-08',
+      category: 'Tutorial',
+      preview: 'Praktyczne zastosowanie sieci neuronowych w obróbce zdjęć i wideo...',
+      readTime: '8 min',
+      status: 'published',
       featured: false,
-      author: "Media Narrative",
+      author: 'Media Narrative',
       views: 892,
-      engagement: 67
+      engagement: 67,
     },
     {
       id: 3,
-      title: "Quantum Computing dla Kreatywnych",
-      date: "2024-09-05",
-      category: "Future Tech",
-      preview: "Jak obliczenia kwantowe mogą wpłynąć na przyszłość branży kreatywnej...",
-      readTime: "12 min",
-      status: "published",
+      title: 'Quantum Computing dla Kreatywnych',
+      date: '2024-09-05',
+      category: 'Future Tech',
+      preview: 'Jak obliczenia kwantowe mogą wpłynąć na przyszłość branży kreatywnej...',
+      readTime: '12 min',
+      status: 'published',
       featured: true,
-      author: "Media Narrative",
+      author: 'Media Narrative',
       views: 2156,
-      engagement: 134
+      engagement: 134,
     },
     {
       id: 4,
-      title: "Holographic Displays - Media 3.0",
-      date: "2024-09-01",
-      category: "Innovation",
-      preview: "Przyszłość wyświetlaczy holograficznych w mediach i reklamie...",
-      readTime: "6 min",
-      status: "draft",
+      title: 'Holographic Displays - Media 3.0',
+      date: '2024-09-01',
+      category: 'Innovation',
+      preview: 'Przyszłość wyświetlaczy holograficznych w mediach i reklamie...',
+      readTime: '6 min',
+      status: 'draft',
       featured: false,
-      author: "Media Narrative",
+      author: 'Media Narrative',
       views: 0,
-      engagement: 0
-    }
+      engagement: 0,
+    },
   ];
 
   const blogPosts = posts.length > 0 ? posts : samplePosts;
@@ -75,13 +76,14 @@ const StaticInfoBoard = ({ posts = [] }) => {
 
   const InfoCard = ({ post, index }) => {
     const statusInfo = getStatusInfo(post.status);
-    
+
     return (
       <AnimatedElement animationType="fadeInUp" delay={200 + index * 100}>
         <div
           className="info-card"
           style={{
-            background: 'linear-gradient(135deg, rgba(15, 47, 15, 0.4) 0%, rgba(0, 0, 0, 0.6) 100%)',
+            background:
+              'linear-gradient(135deg, rgba(15, 47, 15, 0.4) 0%, rgba(0, 0, 0, 0.6) 100%)',
             border: '1px solid rgba(0, 255, 0, 0.1)',
             borderRadius: '12px',
             padding: '1.5rem',
@@ -90,7 +92,7 @@ const StaticInfoBoard = ({ posts = [] }) => {
             transition: 'all 0.3s ease',
             cursor: 'pointer',
             position: 'relative',
-            overflow: 'hidden'
+            overflow: 'hidden',
           }}
           onMouseEnter={(e) => {
             e.target.style.borderColor = 'rgba(0, 255, 0, 0.3)';
@@ -112,33 +114,49 @@ const StaticInfoBoard = ({ posts = [] }) => {
               right: 0,
               height: '3px',
               background: `linear-gradient(90deg, ${statusInfo.color} 0%, transparent 100%)`,
-              opacity: 0.8
+              opacity: 0.8,
             }}
           />
 
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem' }}>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'flex-start',
+              marginBottom: '1rem',
+            }}
+          >
             <div style={{ flex: 1 }}>
               {/* Category and Status */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '0.5rem' }}>
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '1rem',
+                  marginBottom: '0.5rem',
+                }}
+              >
                 <span
                   style={{
                     color: '#00ff88',
                     fontSize: '0.8rem',
                     fontWeight: '600',
                     textTransform: 'uppercase',
-                    letterSpacing: '1px'
+                    letterSpacing: '1px',
                   }}
                 >
                   {post.category}
                 </span>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  <span style={{ color: statusInfo.color, fontSize: '0.8rem' }}>{statusInfo.icon}</span>
+                  <span style={{ color: statusInfo.color, fontSize: '0.8rem' }}>
+                    {statusInfo.icon}
+                  </span>
                   <span
                     style={{
                       color: statusInfo.color,
                       fontSize: '0.7rem',
                       fontWeight: 'bold',
-                      letterSpacing: '1px'
+                      letterSpacing: '1px',
                     }}
                   >
                     {statusInfo.label}
@@ -154,7 +172,7 @@ const StaticInfoBoard = ({ posts = [] }) => {
                   fontWeight: '600',
                   lineHeight: '1.3',
                   marginBottom: '0.8rem',
-                  textShadow: '0 1px 2px rgba(0,0,0,0.5)'
+                  textShadow: '0 1px 2px rgba(0,0,0,0.5)',
                 }}
               >
                 {post.title}
@@ -166,7 +184,7 @@ const StaticInfoBoard = ({ posts = [] }) => {
                   color: 'rgba(255, 255, 255, 0.8)',
                   fontSize: '0.95rem',
                   lineHeight: '1.5',
-                  marginBottom: '1rem'
+                  marginBottom: '1rem',
                 }}
               >
                 {post.preview}
@@ -186,7 +204,7 @@ const StaticInfoBoard = ({ posts = [] }) => {
                   textTransform: 'uppercase',
                   letterSpacing: '1px',
                   fontWeight: 'bold',
-                  marginLeft: '1rem'
+                  marginLeft: '1rem',
                 }}
               >
                 ★ FEATURED
@@ -203,12 +221,15 @@ const StaticInfoBoard = ({ posts = [] }) => {
               padding: '1rem',
               background: 'rgba(0, 0, 0, 0.3)',
               borderRadius: '8px',
-              border: '1px solid rgba(0, 255, 0, 0.1)'
+              border: '1px solid rgba(0, 255, 0, 0.1)',
             }}
           >
             <div style={{ textAlign: 'center' }}>
               <div style={{ color: '#00ff00', fontSize: '1.1rem', fontWeight: 'bold' }}>
-                {new Date(post.date).toLocaleDateString('pl-PL', { day: '2-digit', month: '2-digit' })}
+                {new Date(post.date).toLocaleDateString('pl-PL', {
+                  day: '2-digit',
+                  month: '2-digit',
+                })}
               </div>
               <div style={{ color: 'rgba(255, 255, 255, 0.6)', fontSize: '0.8rem' }}>DATA</div>
             </div>
@@ -252,10 +273,11 @@ const StaticInfoBoard = ({ posts = [] }) => {
             textAlign: 'center',
             marginBottom: '3rem',
             padding: '2rem',
-            background: 'linear-gradient(135deg, rgba(0, 255, 0, 0.05) 0%, rgba(0, 0, 0, 0.3) 100%)',
+            background:
+              'linear-gradient(135deg, rgba(0, 255, 0, 0.05) 0%, rgba(0, 0, 0, 0.3) 100%)',
             borderRadius: '15px',
             border: '1px solid rgba(0, 255, 0, 0.2)',
-            backdropFilter: 'blur(10px)'
+            backdropFilter: 'blur(10px)',
           }}
         >
           <h2
@@ -267,7 +289,7 @@ const StaticInfoBoard = ({ posts = [] }) => {
               color: 'transparent',
               fontWeight: '600',
               marginBottom: '1rem',
-              textShadow: '0 2px 4px rgba(0,0,0,0.3)'
+              textShadow: '0 2px 4px rgba(0,0,0,0.3)',
             }}
           >
             📊 Knowledge Database
@@ -278,17 +300,22 @@ const StaticInfoBoard = ({ posts = [] }) => {
               fontSize: '1.1rem',
               maxWidth: '600px',
               margin: '0 auto',
-              lineHeight: '1.6'
+              lineHeight: '1.6',
             }}
           >
-            Centralny punkt dostępu do najnowszych artykułów, eksperymentów i odkryć w dziedzinie technologii medialnych
+            Centralny punkt dostępu do najnowszych artykułów, eksperymentów i odkryć w dziedzinie
+            technologii medialnych
           </p>
-          
+
           {/* Status indicators */}
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '2rem', marginTop: '1.5rem' }}>
+          <div
+            style={{ display: 'flex', justifyContent: 'center', gap: '2rem', marginTop: '1.5rem' }}
+          >
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
               <span style={{ color: '#00ff00' }}>●</span>
-              <span style={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '0.9rem' }}>Published</span>
+              <span style={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '0.9rem' }}>
+                Published
+              </span>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
               <span style={{ color: '#ffff00' }}>◐</span>
@@ -296,7 +323,9 @@ const StaticInfoBoard = ({ posts = [] }) => {
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
               <span style={{ color: '#ff8800' }}>○</span>
-              <span style={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '0.9rem' }}>Coming Soon</span>
+              <span style={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '0.9rem' }}>
+                Coming Soon
+              </span>
             </div>
           </div>
         </div>
@@ -309,7 +338,7 @@ const StaticInfoBoard = ({ posts = [] }) => {
           gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))',
           gap: '1.5rem',
           maxWidth: '1200px',
-          margin: '0 auto'
+          margin: '0 auto',
         }}
       >
         {blogPosts.map((post, index) => (
@@ -323,11 +352,12 @@ const StaticInfoBoard = ({ posts = [] }) => {
           style={{
             marginTop: '3rem',
             padding: '2rem',
-            background: 'linear-gradient(135deg, rgba(0, 0, 0, 0.6) 0%, rgba(15, 47, 15, 0.4) 100%)',
+            background:
+              'linear-gradient(135deg, rgba(0, 0, 0, 0.6) 0%, rgba(15, 47, 15, 0.4) 100%)',
             borderRadius: '15px',
             border: '1px solid rgba(0, 255, 0, 0.2)',
             backdropFilter: 'blur(10px)',
-            textAlign: 'center'
+            textAlign: 'center',
           }}
         >
           <h3
@@ -335,39 +365,53 @@ const StaticInfoBoard = ({ posts = [] }) => {
               color: '#ffffff',
               fontSize: '1.4rem',
               marginBottom: '1.5rem',
-              fontWeight: '600'
+              fontWeight: '600',
             }}
           >
             📈 Database Statistics
           </h3>
-          
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '2rem' }}>
+
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
+              gap: '2rem',
+            }}
+          >
             <div>
               <div style={{ color: '#00ff00', fontSize: '2rem', fontWeight: 'bold' }}>
-                {blogPosts.filter(p => p.status === 'published').length}
+                {blogPosts.filter((p) => p.status === 'published').length}
               </div>
-              <div style={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '0.9rem' }}>PUBLISHED ARTICLES</div>
+              <div style={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '0.9rem' }}>
+                PUBLISHED ARTICLES
+              </div>
             </div>
-            
+
             <div>
               <div style={{ color: '#ffff00', fontSize: '2rem', fontWeight: 'bold' }}>
-                {blogPosts.filter(p => p.status === 'draft').length}
+                {blogPosts.filter((p) => p.status === 'draft').length}
               </div>
-              <div style={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '0.9rem' }}>DRAFTS IN PROGRESS</div>
+              <div style={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '0.9rem' }}>
+                DRAFTS IN PROGRESS
+              </div>
             </div>
-            
+
             <div>
               <div style={{ color: '#00ffff', fontSize: '2rem', fontWeight: 'bold' }}>
-                {blogPosts.filter(p => p.featured).length}
+                {blogPosts.filter((p) => p.featured).length}
               </div>
-              <div style={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '0.9rem' }}>FEATURED CONTENT</div>
+              <div style={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '0.9rem' }}>
+                FEATURED CONTENT
+              </div>
             </div>
-            
+
             <div>
               <div style={{ color: '#ff8800', fontSize: '2rem', fontWeight: 'bold' }}>
                 {blogPosts.reduce((sum, p) => sum + (p.views || 0), 0)}
               </div>
-              <div style={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '0.9rem' }}>TOTAL VIEWS</div>
+              <div style={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '0.9rem' }}>
+                TOTAL VIEWS
+              </div>
             </div>
           </div>
         </div>

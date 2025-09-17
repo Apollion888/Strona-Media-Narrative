@@ -1,9 +1,9 @@
 ---
-title: "Blog Management Guide"
-description: "Complete guide for managing blog content via Netlify CMS"
-version: "1.0.0"
-last_updated: "2025-01-12"
-tags: ["blog", "cms", "content-management", "netlify"]
+title: 'Blog Management Guide'
+description: 'Complete guide for managing blog content via Netlify CMS'
+version: '1.0.0'
+last_updated: '2025-01-12'
+tags: ['blog', 'cms', 'content-management', 'netlify']
 ---
 
 # Blog Management Guide {#blog-guide}
@@ -17,11 +17,13 @@ Media Narrative uses Netlify CMS for blog content management. This Git-based CMS
 ## Accessing the Blog Panel {#accessing-panel}
 
 ### Direct Access {#direct-access}
+
 1. Navigate to `/blog` in your browser
 2. Click "Otwórz Panel CMS" button
 3. Alternative: Go directly to `/admin`
 
 ### Authentication {#authentication}
+
 1. Use your Netlify account credentials
 2. Or enable Netlify Identity for team members
 3. Git-based authentication ensures security
@@ -39,12 +41,13 @@ Media Narrative uses Netlify CMS for blog content management. This Git-based CMS
    - Click "New Blog Post" button
 
 3. **Fill Post Details**
+
    ```yaml
-   Title: "Your Post Title"
+   Title: 'Your Post Title'
    Date: 2025-01-12
-   Description: "SEO-friendly description"
+   Description: 'SEO-friendly description'
    Cover Image: [Upload or select]
-   Tags: ["tag1", "tag2"]
+   Tags: ['tag1', 'tag2']
    Featured: true/false
    ```
 
@@ -62,11 +65,11 @@ Media Narrative uses Netlify CMS for blog content management. This Git-based CMS
 
 ```markdown
 ---
-title: "Advanced Web Development with Neural Networks"
+title: 'Advanced Web Development with Neural Networks'
 date: 2025-01-12T10:00:00Z
-description: "Exploring neural network visualizations in modern web applications"
-cover: "/images/blog/neural-networks.jpg"
-tags: ["web-development", "neural-networks", "visualization"]
+description: 'Exploring neural network visualizations in modern web applications'
+cover: '/images/blog/neural-networks.jpg'
+tags: ['web-development', 'neural-networks', 'visualization']
 featured: true
 ---
 
@@ -89,11 +92,11 @@ const example = "your code";
 
 ### Image Requirements {#image-requirements}
 
-| Type | Dimensions | Format | Max Size |
-|------|------------|--------|----------|
-| Cover | 1200x630px | AVIF/WebP/JPEG | 500KB |
-| Inline | 800x600px | AVIF/WebP/JPEG | 300KB |
-| Thumbnail | 400x300px | AVIF/WebP/JPEG | 100KB |
+| Type      | Dimensions | Format         | Max Size |
+| --------- | ---------- | -------------- | -------- |
+| Cover     | 1200x630px | AVIF/WebP/JPEG | 500KB    |
+| Inline    | 800x600px  | AVIF/WebP/JPEG | 300KB    |
+| Thumbnail | 400x300px  | AVIF/WebP/JPEG | 100KB    |
 
 ### Optimization Process {#optimization}
 
@@ -107,12 +110,14 @@ const example = "your code";
 ### Best Practices {#image-best-practices}
 
 **DO:**
+
 - Use descriptive filenames: `neural-network-visualization.jpg`
 - Add meaningful alt text for accessibility
 - Optimize before upload when possible
 - Use AVIF/WebP for better performance
 
 **DON'T:**
+
 - Upload uncompressed images
 - Use generic filenames like `image1.jpg`
 - Forget alt text
@@ -136,22 +141,25 @@ const example = "your code";
 ### Extended Features {#extended-features}
 
 #### Code Highlighting {#code-highlighting}
+
 ```javascript
 // Syntax highlighting supported
 function example() {
-  return "Highlighted code";
+  return 'Highlighted code';
 }
 ```
 
 #### Tables {#tables}
+
 ```markdown
-| Feature | Status | Priority |
-|---------|--------|----------|
-| Neural Particles | ✅ Done | High |
-| Blog System | ✅ Done | High |
+| Feature          | Status  | Priority |
+| ---------------- | ------- | -------- |
+| Neural Particles | ✅ Done | High     |
+| Blog System      | ✅ Done | High     |
 ```
 
 #### Task Lists {#task-lists}
+
 ```markdown
 - [x] Completed task
 - [ ] Pending task
@@ -162,6 +170,7 @@ function example() {
 ### Meta Tags {#meta-tags}
 
 Each post automatically generates:
+
 - Page title: `Post Title | Media Narrative`
 - Meta description from post description
 - Open Graph tags for social sharing
@@ -205,8 +214,9 @@ Each post automatically generates:
 ### Scheduling Posts {#scheduling}
 
 Set future dates to schedule posts:
+
 ```yaml
-date: 2025-01-15T10:00:00Z  # Will publish at this time
+date: 2025-01-15T10:00:00Z # Will publish at this time
 ```
 
 ## Troubleshooting {#troubleshooting}
@@ -214,21 +224,25 @@ date: 2025-01-15T10:00:00Z  # Will publish at this time
 ### Common Issues {#common-issues}
 
 #### Can't Access Admin Panel {#access-issues}
+
 - Clear browser cache
 - Check Netlify Identity settings
 - Verify Git permissions
 
 #### Images Not Displaying {#image-issues}
+
 - Check file path is correct
 - Verify image uploaded to media folder
 - Ensure proper format (AVIF/WebP/JPEG)
 
 #### Post Not Publishing {#publishing-issues}
+
 - Check required fields are filled
 - Verify date format is correct
 - Ensure no build errors in Netlify
 
 #### Markdown Not Rendering {#markdown-issues}
+
 - Check for syntax errors
 - Verify code blocks are properly closed
 - Ensure special characters are escaped

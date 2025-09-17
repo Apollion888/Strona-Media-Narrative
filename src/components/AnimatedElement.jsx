@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-const AnimatedElement = ({ 
-  children, 
+const AnimatedElement = ({
+  children,
   animationType = 'fadeInUp',
   delay = 0,
   duration = 0.8,
   triggerOnScroll = true,
   className = '',
-  ...props 
+  ...props
 }) => {
   const [isVisible, setIsVisible] = useState(!triggerOnScroll);
   const elementRef = useRef(null);
@@ -40,8 +40,8 @@ const AnimatedElement = ({
       },
       {
         threshold: 0.1,
-        rootMargin: '50px'
-      }
+        rootMargin: '50px',
+      },
     );
 
     if (elementRef.current) {
@@ -60,7 +60,7 @@ const AnimatedElement = ({
       ? { transition: 'none' }
       : {
           transition: `all ${duration}s cubic-bezier(0.25, 0.46, 0.45, 0.94)`,
-          transitionDelay: `${delay}ms`
+          transitionDelay: `${delay}ms`,
         };
 
     if (reducedMotion) {
@@ -69,7 +69,7 @@ const AnimatedElement = ({
         ...baseStyles,
         opacity: 1,
         transform: 'none',
-        filter: 'none'
+        filter: 'none',
       };
     }
 
@@ -79,61 +79,61 @@ const AnimatedElement = ({
           return {
             ...baseStyles,
             opacity: 0,
-            transform: 'scale(0.95)'
+            transform: 'scale(0.95)',
           };
         case 'fadeInUp':
           return {
             ...baseStyles,
             opacity: 0,
-            transform: 'translateY(30px) scale(0.98)'
+            transform: 'translateY(30px) scale(0.98)',
           };
         case 'fadeInDown':
           return {
             ...baseStyles,
             opacity: 0,
-            transform: 'translateY(-30px) scale(0.98)'
+            transform: 'translateY(-30px) scale(0.98)',
           };
         case 'fadeInLeft':
           return {
             ...baseStyles,
             opacity: 0,
-            transform: 'translateX(-30px) scale(0.98)'
+            transform: 'translateX(-30px) scale(0.98)',
           };
         case 'fadeInRight':
           return {
             ...baseStyles,
             opacity: 0,
-            transform: 'translateX(30px) scale(0.98)'
+            transform: 'translateX(30px) scale(0.98)',
           };
         case 'slideUp':
           return {
             ...baseStyles,
             opacity: 0,
-            transform: 'translateY(50px)'
+            transform: 'translateY(50px)',
           };
         case 'scaleIn':
           return {
             ...baseStyles,
             opacity: 0,
-            transform: 'scale(0.8)'
+            transform: 'scale(0.8)',
           };
         case 'rotateIn':
           return {
             ...baseStyles,
             opacity: 0,
-            transform: 'rotate(-10deg) scale(0.9)'
+            transform: 'rotate(-10deg) scale(0.9)',
           };
         case 'glitchIn':
           return {
             ...baseStyles,
             opacity: 0,
             transform: 'translateX(-5px) skew(-2deg)',
-            filter: 'hue-rotate(90deg)'
+            filter: 'hue-rotate(90deg)',
           };
         default:
           return {
             ...baseStyles,
-            opacity: 0
+            opacity: 0,
           };
       }
     } else {
@@ -141,7 +141,7 @@ const AnimatedElement = ({
         ...baseStyles,
         opacity: 1,
         transform: 'translateY(0) translateX(0) scale(1) rotate(0) skew(0)',
-        filter: 'none'
+        filter: 'none',
       };
     }
   };
