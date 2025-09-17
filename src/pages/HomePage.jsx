@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import HolographicText from '../components/HolographicText';
 import GlitchEffect from '../components/GlitchEffect';
@@ -65,6 +65,11 @@ const upcomingSlots = ['02', '03', '04', '05', '06'];
 
 const HomePage = () => {
   const location = useLocation();
+  const [formState, setFormState] = useState({
+    loading: false,
+    success: false,
+    error: null
+  });
 
   useEffect(() => {
     if (!location.state?.scrollTo) return;
@@ -97,6 +102,50 @@ const HomePage = () => {
 
     return () => observer.disconnect();
   }, []);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    
+    // Reset form state
+    setFormState({ loading: true, success: false, error: null });
+    
+    // Get form data
+    const formData = new FormData(event.target);
+    const data = {
+      name: formData.get('name'),
+      email: formData.get('email'),
+      message: formData.get('message')
+    };
+    
+    try {
+      const response = await fetch('/.netlify/functions/sendEmail', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+      });
+      
+      const result = await response.json();
+      
+      if (result.ok) {
+        setFormState({ loading: false, success: true, error: null });
+        event.target.reset(); // Clear form
+      } else {
+        setFormState({ 
+          loading: false, 
+          success: false, 
+          error: result.error || 'Wystąpił błąd podczas wysyłania wiadomości.' 
+        });
+      }
+    } catch (error) {
+      setFormState({ 
+        loading: false, 
+        success: false, 
+        error: 'Błąd połączenia. Sprawdź Internet i spróbuj ponownie.' 
+      });
+    }
+  };
 
   return (
     <div className="home-page">
@@ -290,10 +339,7 @@ const HomePage = () => {
                 className="contact"
                 method="POST"
                 action="#"
-                onSubmit={(event) => {
-                  event.preventDefault();
-                  alert('Formularz zostanie wkrotce podlaczony do automatycznej wysylki. Dzieki!');
-                }}
+                onSubmit={handleSubmit}
               >
                 <div className="row">
                   <label>
@@ -317,8 +363,28 @@ const HomePage = () => {
                   />
                 </label>
                 <div className="form-actions">
-                  <button className="btn btn-primary" type="submit">Wyslij</button>
-                  <small>Twoje dane sluza wylacznie do kontaktu zwrotnego.</small>
+                  <button 
+                    className="btn btn-primary" 
+                    type="submit"
+                    disabled={formState.loading}
+                  >
+                    {formState.loading ? 'Wysyłanie...' : 'Wyślij'}
+                  </button>
+                  <small>Twoje dane służą wyłącznie do kontaktu zwrotnego.</small>
+                </div>
+                
+                {/* Form status messages */}
+                <div className="form-status" aria-live="polite">
+                  {formState.success && (
+                    <div className="form-message form-success">
+                      ✅ Wiadomość została wysłana! Odpiszę w ciągu 24h.
+                    </div>
+                  )}
+                  {formState.error && (
+                    <div className="form-message form-error">
+                      ❌ {formState.error}
+                    </div>
+                  )}
                 </div>
               </form>
             </div>
